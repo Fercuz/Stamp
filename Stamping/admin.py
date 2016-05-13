@@ -1,5 +1,4 @@
 from django.contrib import admin
-from actions import export_as_csv
 from models import *
 
 class ColorAdmin(admin.ModelAdmin):
