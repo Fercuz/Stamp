@@ -1,80 +1,75 @@
 from django.contrib import admin
-from django.db import models
+from Stamping.models import *
 
 class ColorAdmin(admin.ModelAdmin):
-	list_display = ('nombre','referencia')
+	list_display = ('nombre','referencia',)
 	search_fields = ('nombre',)
+
+class ComprainsumoAdmin(admin.ModelAdmin):
+	list_display = ('cod_compra_insumo','cod_insumo','cod_persona','cantidad','valor')
+	search_fields = ('cod_compra_insumo','cod_insumo','cod_persona','cantidad','valor')
+
+class EstampadoAdmin(admin.ModelAdmin):
+	list_display = ('cod_estampado','nombre',)
+	search_fields = ('cod_estampado','nombre',)
 
 class EstiloAdmin(admin.ModelAdmin):
-	list_display = ('nombre',)
-	search_fields = ('nombre',)
+	list_display = ('cod_estilo','nombre',)
+	search_fields = ('cod_estilo','nombre',)
 
 class InsumoAdmin(admin.ModelAdmin):
-	list_display = ('nombre','referencia','tipo','fecha_vencimiento')
-	search_fields = ('nombre','referencia','tipo')
+	list_display = ('cod_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
+	search_fields = ('cod_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
 
 class InsumoproductoAdmin(admin.ModelAdmin):
-	list_display = ('cantidad','valor')
-	search_fields = ('valor',)
+	list_display = ('cod_insumo_producto','cod_producto','cod_insumo','cantidad','valor',)
+	search_fields = ('cod_insumo_producto','cod_producto','cod_insumo','cantidad','valor',)
 
 class MarcaAdmin(admin.ModelAdmin):
-	list_display = ('nombre',)
-	search_fields = ('nombre',)
-
-class MovimientoAdmin(admin.ModelAdmin):
-	list_display = ('fecha_movimiento','monto')
-	search_fields = ('fecha_movimiento','monto')
-
-class MovimientoinsumoAdmin(admin.ModelAdmin):
-	list_display = ('cantidad','valor')
-	search_fields = ('valor',)
-
-class MovimientoproductoAdmin(admin.ModelAdmin):
-	list_display = ('cantidad','valor')
-	search_fields = ('valor',)
+	list_display = ('cod_marca','nombre',)
+	search_fields = ('cod_marca','nombre',)
 
 class PerfilAdmin(admin.ModelAdmin):
-	list_display = ('nombre',)
+	list_display = ('cod_perfil','nombre')
+	search_fields = ('cod_perfil','nombre')
 
 class PersonaAdmin(admin.ModelAdmin):
-	list_display = ('cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
-	search_fields = ('cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
+	list_display = ('cod_persona','cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
+	search_fields = ('cod_persona','cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
 
 class ProductoAdmin(admin.ModelAdmin):
 	list_display = ('nombre','valor_venta','valor_produccion','cantidad_existente','descripcion')
 	search_fields = ('nombre','valor_venta','valor_produccion','cantidad_existente','descripcion')
 
 class TallaAdmin(admin.ModelAdmin):
-	list_display = ('numero','letra')
+	list_display = ('cod_talla','numero','letra')
 
-class TipoestampadoAdmin(admin.ModelAdmin):
-	list_display = ('nombre','descripcion')
+class TelaAdmin(admin.ModelAdmin):
+	list_display = ('cod_tela','nombre','descripcion')
 
-class TipomovimientoAdmin(admin.ModelAdmin):
-	list_display = ('nombre',)
+class VentaAdmin(admin.ModelAdmin):
+	list_display = ('cod_venta','cod_persona','fecha_movimiento')
 
-class TipotelaAdmin(admin.ModelAdmin):
-	list_display = ('nombre',)
-	search_fields = ('nombre',)
+class VentaproductoAdmin(admin.ModelAdmin):
+	list_display = ('cod_venta_producto','cod_venta','cod_producto','valor')
+	search_fields = ('cod_venta_producto','cod_venta','cod_producto','valor')
 
 admin.site.register(Color,ColorAdmin)
+admin.site.register(Comprainsumo,ComprainsumoAdmin)
+admin.site.register(Estampado,EstampadoAdmin)
 admin.site.register(Estilo,EstiloAdmin)
 admin.site.register(Insumo,InsumoAdmin)
 admin.site.register(Insumoproducto,InsumoproductoAdmin)
 admin.site.register(Marca,MarcaAdmin)
-admin.site.register(Movimiento,MovimientoAdmin)
-admin.site.register(Movimientoinsumo,MovimientoinsumoAdmin)
-admin.site.register(Movimientoproducto,MovimientoproductoAdmin)
 admin.site.register(Perfil,PerfilAdmin)
 admin.site.register(Persona,PersonaAdmin)
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Talla,TallaAdmin)
-admin.site.register(Tipoestampado,TipoestampadoAdmin)
-admin.site.register(Tipomovimiento,TipomovimientoAdmin)
-admin.site.register(Tipotela,TipotelaAdmin)
+admin.site.register(Tela,TelaAdmin)
+admin.site.register(Venta,VentaAdmin)
+admin.site.register(Ventaproducto,VentaproductoAdmin)
 
 # from import_export import resources
-
 # class ColorResource(resources.ModelResource):
 
 #     class Meta:
