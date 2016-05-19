@@ -14,8 +14,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Stamping',
-
-
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -91,3 +89,11 @@ USE_TZ = True
 # Static files
 
 STATIC_URL = "/static/"
+
+# Email Settings
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'fercuz@gmail.com'
+EMAIL_HOST_PASSWORD = 'anamari'
+EMAIL_PORT = 587
