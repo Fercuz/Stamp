@@ -24,6 +24,7 @@ nav ul li a{
     font-size: 0.9em;
     color:rgba(120,204,230,0.9);
     font-weight: 500;
+    top:0;
     margin-left: 5px;
     margin-right: 15px;
 }
@@ -70,7 +71,7 @@ footer {
 #hdr {
     background: url('../img/01.jpg') bottom no-repeat;
     width: 100%;
-    height:800px;
+    height:1100px;
 }
 
 #l {
@@ -124,10 +125,20 @@ footer {
     border-radius: 50%;
     width: 225px;
     height: 225px;
-    margin: 130px auto 0px auto;
+    margin: 185px auto 0px auto;
     background-color: white;
     text-align: center;
     box-shadow: 0 2px 15px rgba(0, 0, 0, .2); 
+}
+#crle1 {
+    border-radius: 50%;
+    width: 225px;
+    height: 225px;
+    margin: 5px auto 0px auto;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .2); 
+    visibility: hidden;
 }
 #ecrle {
     border-radius: 50%;
@@ -145,7 +156,7 @@ footer {
     border-radius: 50%;
     width: 200px;
     height: 200px;
-    margin: 10px 0 0 12px;
+    margin: 12px 0 0 12px;
     position: absolute;
 }
 
@@ -199,6 +210,14 @@ footer {
     margin: 5px;
 }
 
+#i03 {
+    text-shadow: 0px 0px 4px rgba(150, 150, 150,0.3);
+    color: rgba(120,204,230,0.9);
+    font-size: 15px;
+    margin: 2px 7px 2px 2px;
+
+}
+
 #inf {
     width: 60%;
     height: 335px;
@@ -238,6 +257,94 @@ footer {
     visibility: hidden;
 }
 
+#ctc {
+    width: 24%;
+    color: #ffffff;
+    text-align: center;
+    margin: 0 auto 0 auto;
+}
+
+#ctc input{
+    border-radius: 5px;
+    border-style: none;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    outline: none;
+    float:right;
+    color: #4dc3ff;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    background: linear-gradient(to bottom, #eaeaea 0%, #ffffff 40%); 
+
+}
+
+#ctc input:hover{
+    background: linear-gradient(to bottom, #eaeaea 0%,#ffffff 25%); 
+}
+
+#ctc textarea{
+    border-radius: 5px;
+    border-style: none;
+    outline: none;
+    padding: 45px 45px 45px 45px;
+    float:left;
+    width: 310px;
+    height: 200px;
+    color: #4dc3ff;
+    text-align: center;
+    margin: 0 auto 0 auto;
+    background: linear-gradient(to bottom, #eaeaea 0%,#ffffff 10%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+#ctc textarea:hover{
+    background: linear-gradient(to bottom, #eaeaea 0%,#ffffff 7%); 
+    border: none;
+}
+
+#ctc button {
+    background: linear-gradient(to bottom, #eaeaea 0%,#ffffff 7%);
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 45px 9px 45px;
+    margin: 10px 20px;
+    float: left;
+    /* width: 148px; */
+    /* height: 43px; */
+    color: #4dc3ff;
+    text-align: center;
+}
+
+#formulario {
+    visibility: hidden;
+}
+
+#ctc p{
+    margin: 20px 20px 20px 20px;
+    float:left;
+    color: #ffffff;
+    text-align: center;
+}
+#ctc label{
+    margin: 5px 5px 5px 5px;
+    float:right;
+    color: #ffffff;
+    text-align: left;
+    display: inline-block;
+}
+#ctc h1 {
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+#h01 {
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    font-size: 32px;
+}
+#h02 {
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+    visibility: hidden;
+    font-size: 25px;
+}
 #tle {
     color: rgba(255,255,255,10);
     text-shadow: 0px 0px 6px rgba(150, 150, 150, 1);
