@@ -33,6 +33,9 @@ def contacto(request):
         if form.is_valid():
             asunto = 'Este es un mensaje de mi blog en DJANGO'
             mensaje = form.cleaned_data['mensaje']
+            email = form.cleaned_data['email']
+
+            ##pendiete
             mail = EmailMessage(asunto, mensaje,'fercuz@gmail.com', ['second@test.com', 'dsdsd@gmail.von'] )
             mail.send()
         return render_to_response('gracias.html', context_instance=RequestContext(request))
