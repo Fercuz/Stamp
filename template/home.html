@@ -27,7 +27,7 @@
                      <ul>
                      <li><a id="al01" title="Inicio"><i id="i01" class="icon-home3"></i>Inicio</a></li>
                      <li><a id="al02" title="Caracteristicas"><i id="i01" class=" icon-price-tags"></i>Caracteristicas</a></li>
-                     <li><a id="al03" title="Ayuda" onclick="rd('/static/files/Image.png')"><i id="i01" class="icon-cog"></i>Ayuda</a></li>
+                     <li><a id="al03" title="Ayuda" onclick="rd('/static/files/ManualUsuario.pdf')"><i id="i01" class="icon-cog"></i>Ayuda</a></li>
                      <li><a id="al04" title="Contacto" onclick="rd('/contacto')"><i id="i01" class="icon-phone"></i>Contacto</a></li>
                      <li><a id="al05" title="Acerca"><i id="i01" class="icon-bubbles"></i>Acerca</a></li>
                      <li><a id="al06" title="Administración" onclick="rd('/admin')"><i id="i01" class="icon-lock"></i>Administración</a></li>
@@ -114,11 +114,11 @@
                 $.scrollUp({
                 scrollName: 'scrollUp',
                 topDistance: '300', 
-                topSpeed: 150, 
-                animation: 'fade', 
-                animationInSpeed: 450, 
+                topSpeed: 400,
+                animation: 'slide',
+                animationInSpeed: 650,
                 animationOutSpeed: 450, 
-                scrollText: '˄',
+                scrollText: 'Inicio',
                 activeOverlay: false,
                 });
             });
@@ -139,7 +139,7 @@
 
             },{ offset: '60%' });
 
-            $('body').stellar();
+            $('#pl').stellar();
 
             $('#al01').click(function(){
               $('nav').animatescroll();
