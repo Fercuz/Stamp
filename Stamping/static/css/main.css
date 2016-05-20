@@ -232,7 +232,7 @@ footer {
 }
 
 #inf02 {
-    background: url('../img/b.jpg') center no-repeat;
+    background: rgba(110,211,244,0.5) url('../img/b.jpg') center no-repeat ;
     text-align: center;
     border-radius: 6px;
     width: 100%;
