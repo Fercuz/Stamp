@@ -2,70 +2,67 @@ from django.contrib import admin
 from Stamping.models import *
 from import_export.admin import ImportExportModelAdmin
 
+class ClienteAdmin(admin.ModelAdmin):
+	list_display = ('cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
+	search_fields = ('cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
+
 class ColorAdmin(admin.ModelAdmin):
 	list_display = ('nombre','referencia',)
 	search_fields = ('nombre',)
 
-class ComprainsumoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-	list_display = ('cod_compra_insumo','cod_insumo','cod_persona','cantidad','valor')
-	search_fields = ('cod_compra_insumo','cod_insumo','cod_persona','cantidad','valor')
+class CompraAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+	list_display = ('codigo_compra','codigo_insumo','codigo_empleado','cantidad','precio','fecha')
+	search_fields = ('codigo_compra','codigo_insumo','codigo_empleado','cantidad','precio','fecha')
+
+class DetalleAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+	list_display = ('codigo_detalle','codigo_producto','codigo_insumo','descripcion')
+	search_fields = ('codigo_detalle','codigo_producto','codigo_insumo','descripcion')
+
+class EmpleadoAdmin(admin.ModelAdmin):
+	list_display = ('cedula','nombre','apellido','fecha_nacimiento','fecha_contratacion','telefono','movil','email')
+	search_fields = ('cedula','nombre','apellido','fecha_nacimiento','fecha_contratacion','telefono','movil','email')
 
 class EstampadoAdmin(admin.ModelAdmin):
-	list_display = ('cod_estampado','nombre',)
-	search_fields = ('cod_estampado','nombre',)
+	list_display = ('codigo_estampado','nombre',)
+	search_fields = ('codigo_estampado','nombre',)
 
 class EstiloAdmin(admin.ModelAdmin):
-	list_display = ('cod_estilo','nombre',)
-	search_fields = ('cod_estilo','nombre',)
+	list_display = ('codigo_estilo','nombre',)
+	search_fields = ('codigo_estilo','nombre',)
+
+class FacturaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
+	list_display = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
+	search_fields = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
 
 class InsumoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('cod_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
-	search_fields = ('cod_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
-
-class InsumoproductoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('cod_insumo_producto','cod_producto','cod_insumo','cantidad','valor',)
-	search_fields = ('cod_insumo_producto','cod_producto','cod_insumo','cantidad','valor',)
-
-class MarcaAdmin(admin.ModelAdmin):
-	list_display = ('cod_marca','nombre',)
-	search_fields = ('cod_marca','nombre',)
-
-class PerfilAdmin(admin.ModelAdmin):
-	list_display = ('cod_perfil','nombre')
-	search_fields = ('cod_perfil','nombre')
-
-class PersonaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('cod_persona','cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
-	search_fields = ('cod_persona','cedula','nombre','apellido','fecha_nacimiento','telefono','movil','email')
+	list_display = ('codigo_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
+	search_fields = ('codigo_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
 
 class ProductoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('nombre','valor_venta','valor_produccion','cantidad_existente','descripcion')
-	search_fields = ('nombre','valor_venta','valor_produccion','cantidad_existente','descripcion')
+	list_display = ('nombre','precio','stock','descripcion')
+	search_fields = ('nombre','precio','stock','descripcion')
 
 class TallaAdmin(admin.ModelAdmin):
-	list_display = ('cod_talla','numero','letra')
+	list_display = ('codigo_talla','numero','letra')
 
 class TelaAdmin(admin.ModelAdmin):
-	list_display = ('cod_tela','nombre','descripcion')
+	list_display = ('codigo_tela','nombre','descripcion')
 
 class VentaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('cod_venta','cod_persona','fecha_movimiento')
+	list_display = ('codigo_venta','codigo_factura','codigo_producto','cantidad','precio')
 
-class VentaproductoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('cod_venta_producto','cod_venta','cod_producto','valor')
-	search_fields = ('cod_venta_producto','cod_venta','cod_producto','valor')
 
+admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Color,ColorAdmin)
-admin.site.register(Comprainsumo,ComprainsumoAdmin)
+admin.site.register(Compra,CompraAdmin)
+admin.site.register(Detalle,DetalleAdmin)
+admin.site.register(Empleado,EmpleadoAdmin)
 admin.site.register(Estampado,EstampadoAdmin)
 admin.site.register(Estilo,EstiloAdmin)
+admin.site.register(Factura,FacturaAdmin)
 admin.site.register(Insumo,InsumoAdmin)
-admin.site.register(Insumoproducto,InsumoproductoAdmin)
-admin.site.register(Marca,MarcaAdmin)
-admin.site.register(Perfil,PerfilAdmin)
-admin.site.register(Persona,PersonaAdmin)
 admin.site.register(Producto,ProductoAdmin)
 admin.site.register(Talla,TallaAdmin)
 admin.site.register(Tela,TelaAdmin)
 admin.site.register(Venta,VentaAdmin)
-admin.site.register(Ventaproducto,VentaproductoAdmin)
+

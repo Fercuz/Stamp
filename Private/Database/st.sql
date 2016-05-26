@@ -1,27 +1,22 @@
-
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+-- -----------------------------------------------------
+-- Schema st
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema st
+-- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `st` DEFAULT CHARACTER SET utf8 ;
 USE `st` ;
 
 -- -----------------------------------------------------
--- Table `st`.`Perfil`
+-- Table `st`.`Cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`Perfil` (
-  `Cod_Perfil` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Cod_Perfil`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `st`.`Persona`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`Persona` (
-  `Cod_Persona` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Perfil` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `st`.`Cliente` (
+  `Codigo_Cliente` INT NOT NULL AUTO_INCREMENT,
   `Cedula` VARCHAR(45) NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Apellido` VARCHAR(45) NOT NULL,
@@ -30,23 +25,7 @@ CREATE TABLE IF NOT EXISTS `st`.`Persona` (
   `Direccion` VARCHAR(45) NOT NULL,
   `Movil` VARCHAR(45) NULL,
   `Email` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Cod_Persona`),
-  INDEX `fk_Persona_Perfil1_idx` (`Cod_Perfil` ASC),
-  CONSTRAINT `fk_Persona_Perfil1`
-    FOREIGN KEY (`Cod_Perfil`)
-    REFERENCES `st`.`Perfil` (`Cod_Perfil`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `st`.`Marca`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`Marca` (
-  `Cod_Marca` INT NOT NULL AUTO_INCREMENT,
-  `Nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Cod_Marca`))
+  PRIMARY KEY (`Codigo_Cliente`))
 ENGINE = InnoDB;
 
 
@@ -54,10 +33,10 @@ ENGINE = InnoDB;
 -- Table `st`.`Talla`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Talla` (
-  `Cod_Talla` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Talla` INT NOT NULL AUTO_INCREMENT,
   `Numero` VARCHAR(45) NOT NULL,
   `Letra` VARCHAR(45) NULL,
-  PRIMARY KEY (`Cod_Talla`))
+  PRIMARY KEY (`Codigo_Talla`))
 ENGINE = InnoDB;
 
 
@@ -65,10 +44,10 @@ ENGINE = InnoDB;
 -- Table `st`.`Color`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Color` (
-  `Cod_Color` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Color` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Referencia` VARCHAR(45) NULL,
-  PRIMARY KEY (`Cod_Color`))
+  PRIMARY KEY (`Codigo_Color`))
 ENGINE = InnoDB;
 
 
@@ -76,9 +55,9 @@ ENGINE = InnoDB;
 -- Table `st`.`Estilo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Estilo` (
-  `Cod_Estilo` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Estilo` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`Cod_Estilo`))
+  PRIMARY KEY (`Codigo_Estilo`))
 ENGINE = InnoDB;
 
 
@@ -86,10 +65,10 @@ ENGINE = InnoDB;
 -- Table `st`.`Tela`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Tela` (
-  `Cod_Tela` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Tela` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`Cod_Tela`))
+  PRIMARY KEY (`Codigo_Tela`))
 ENGINE = InnoDB;
 
 
@@ -97,10 +76,11 @@ ENGINE = InnoDB;
 -- Table `st`.`Estampado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Estampado` (
-  `Cod_Estampado` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Estampado` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
+  `Imagen` VARCHAR(45) NULL,
   `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`Cod_Estampado`))
+  PRIMARY KEY (`Codigo_Estampado`))
 ENGINE = InnoDB;
 
 
@@ -108,73 +88,88 @@ ENGINE = InnoDB;
 -- Table `st`.`Producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Producto` (
-  `Cod_Producto` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Estampado` INT NOT NULL,
-  `Cod_Tela` INT NOT NULL,
-  `Cod_Marca` INT NOT NULL,
-  `Cod_Talla` INT NOT NULL,
-  `Cod_Color` INT NOT NULL,
-  `Cod_Estilo` INT NOT NULL,
+  `Codigo_Producto` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Tela` INT NOT NULL,
+  `Codigo_Estilo` INT NOT NULL,
+  `Codigo_Talla` INT NOT NULL,
+  `Codigo_Color` INT NOT NULL,
+  `Codigo_Estampado` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Valor_Venta` INT NOT NULL,
-  `Valor_Produccion` INT NOT NULL,
-  `Cantidad_Existente` INT NOT NULL,
-  `Stock_Minimo` INT NOT NULL,
-  `Stock_Maximo` INT NOT NULL,
+  `Precio` INT NOT NULL,
+  `Stock` INT NOT NULL,
   `Descripcion` VARCHAR(45) NULL,
-  PRIMARY KEY (`Cod_Producto`),
-  INDEX `fk_Producto_Marca1_idx` (`Cod_Marca` ASC),
-  INDEX `fk_Producto_Talla1_idx` (`Cod_Talla` ASC),
-  INDEX `fk_Producto_Color1_idx` (`Cod_Color` ASC),
-  INDEX `fk_Producto_Estilo1_idx` (`Cod_Estilo` ASC),
-  INDEX `fk_Producto_Tipo_Tela1_idx` (`Cod_Tela` ASC),
-  INDEX `fk_Producto_Estampado1_idx` (`Cod_Estampado` ASC),
-  CONSTRAINT `fk_Producto_Marca1`
-    FOREIGN KEY (`Cod_Marca`)
-    REFERENCES `st`.`Marca` (`Cod_Marca`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  PRIMARY KEY (`Codigo_Producto`),
+  INDEX `fk_Producto_Talla1_idx` (`Codigo_Talla` ASC),
+  INDEX `fk_Producto_Color1_idx` (`Codigo_Color` ASC),
+  INDEX `fk_Producto_Estilo1_idx` (`Codigo_Estilo` ASC),
+  INDEX `fk_Producto_Tipo_Tela1_idx` (`Codigo_Tela` ASC),
+  INDEX `fk_Producto_Estampado1_idx` (`Codigo_Estampado` ASC),
   CONSTRAINT `fk_Producto_Talla1`
-    FOREIGN KEY (`Cod_Talla`)
-    REFERENCES `st`.`Talla` (`Cod_Talla`)
+    FOREIGN KEY (`Codigo_Talla`)
+    REFERENCES `st`.`Talla` (`Codigo_Talla`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Producto_Color1`
-    FOREIGN KEY (`Cod_Color`)
-    REFERENCES `st`.`Color` (`Cod_Color`)
+    FOREIGN KEY (`Codigo_Color`)
+    REFERENCES `st`.`Color` (`Codigo_Color`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Producto_Estilo1`
-    FOREIGN KEY (`Cod_Estilo`)
-    REFERENCES `st`.`Estilo` (`Cod_Estilo`)
+    FOREIGN KEY (`Codigo_Estilo`)
+    REFERENCES `st`.`Estilo` (`Codigo_Estilo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Producto_Tipo_Tela1`
-    FOREIGN KEY (`Cod_Tela`)
-    REFERENCES `st`.`Tela` (`Cod_Tela`)
+    FOREIGN KEY (`Codigo_Tela`)
+    REFERENCES `st`.`Tela` (`Codigo_Tela`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Producto_Estampado1`
-    FOREIGN KEY (`Cod_Estampado`)
-    REFERENCES `st`.`Estampado` (`Cod_Estampado`)
+    FOREIGN KEY (`Codigo_Estampado`)
+    REFERENCES `st`.`Estampado` (`Codigo_Estampado`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `st`.`Venta`
+-- Table `st`.`Empleado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`Venta` (
-  `Cod_Venta` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Persona` INT NOT NULL,
-  `Fecha_Movimiento` DATE NOT NULL,
-  `Monto` DOUBLE NOT NULL,
-  PRIMARY KEY (`Cod_Venta`),
-  INDEX `fk_Movimiento_Persona1_idx` (`Cod_Persona` ASC),
+CREATE TABLE IF NOT EXISTS `st`.`Empleado` (
+  `Codigo_Empleado` INT NOT NULL AUTO_INCREMENT,
+  `Cedula` VARCHAR(45) NOT NULL,
+  `Nombre` VARCHAR(45) NOT NULL,
+  `Apellido` VARCHAR(45) NOT NULL,
+  `Fecha_Nacimiento` DATE NOT NULL,
+  `Fecha_Contratacion` DATE NOT NULL,
+  `Telefono` VARCHAR(45) NOT NULL,
+  `Direccion` VARCHAR(45) NOT NULL,
+  `Movil` VARCHAR(45) NULL,
+  `Email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo_Empleado`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `st`.`Factura`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `st`.`Factura` (
+  `Codigo_Factura` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Cliente` INT NOT NULL,
+  `Codigo_Empleado` INT NOT NULL,
+  `Fecha` DATE NOT NULL,
+  `Total` DOUBLE NOT NULL,
+  PRIMARY KEY (`Codigo_Factura`),
+  INDEX `fk_Movimiento_Persona1_idx` (`Codigo_Cliente` ASC),
+  INDEX `fk_Factura_Vendedor1_idx` (`Codigo_Empleado` ASC),
   CONSTRAINT `fk_Movimiento_Persona1`
-    FOREIGN KEY (`Cod_Persona`)
-    REFERENCES `st`.`Persona` (`Cod_Persona`)
+    FOREIGN KEY (`Codigo_Cliente`)
+    REFERENCES `st`.`Cliente` (`Codigo_Cliente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Factura_Vendedor1`
+    FOREIGN KEY (`Codigo_Empleado`)
+    REFERENCES `st`.`Empleado` (`Codigo_Empleado`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -184,86 +179,87 @@ ENGINE = InnoDB;
 -- Table `st`.`Insumo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `st`.`Insumo` (
-  `Cod_Insumo` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Insumo` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `Referencia` VARCHAR(45) NOT NULL,
   `Tipo` VARCHAR(45) NOT NULL,
   `Fecha_Compra` DATE NOT NULL,
   `Fecha_Vencimiento` DATE NOT NULL,
-  PRIMARY KEY (`Cod_Insumo`))
+  PRIMARY KEY (`Codigo_Insumo`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `st`.`CompraInsumo`
+-- Table `st`.`Compra`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`CompraInsumo` (
-  `Cod_Compra_Insumo` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Insumo` INT NOT NULL,
-  `Cod_Persona` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `st`.`Compra` (
+  `Codigo_Compra` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Insumo` INT NOT NULL,
+  `Codigo_Empleado` INT NOT NULL,
   `Cantidad` VARCHAR(45) NOT NULL,
-  `Valor` DOUBLE NOT NULL,
-  PRIMARY KEY (`Cod_Compra_Insumo`),
-  INDEX `fk_MovimientoInsumo_Insumo1_idx` (`Cod_Insumo` ASC),
-  INDEX `fk_CompraInsumo_Persona1_idx` (`Cod_Persona` ASC),
-  CONSTRAINT `fk_MovimientoInsumo_Insumo1`
-    FOREIGN KEY (`Cod_Insumo`)
-    REFERENCES `st`.`Insumo` (`Cod_Insumo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_CompraInsumo_Persona1`
-    FOREIGN KEY (`Cod_Persona`)
-    REFERENCES `st`.`Persona` (`Cod_Persona`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `st`.`InsumoProducto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`InsumoProducto` (
-  `Cod_Insumo_Producto` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Producto` INT NOT NULL,
-  `Cod_Insumo` INT NOT NULL,
-  `Cantidad` VARCHAR(45) NOT NULL,
-  `Valor` DOUBLE NOT NULL,
-  INDEX `fk_Producto_has_Insumo_Insumo1_idx` (`Cod_Insumo` ASC),
-  PRIMARY KEY (`Cod_Insumo_Producto`),
-  INDEX `fk_InsumoProducto_Producto1_idx` (`Cod_Producto` ASC),
+  `Precio` DOUBLE NOT NULL,
+  `Fecha` DATE NOT NULL,
+  INDEX `fk_Producto_has_Insumo_Insumo1_idx` (`Codigo_Insumo` ASC),
+  PRIMARY KEY (`Codigo_Compra`),
+  INDEX `fk_Compra_Vendedor1_idx` (`Codigo_Empleado` ASC),
   CONSTRAINT `fk_Producto_has_Insumo_Insumo1`
-    FOREIGN KEY (`Cod_Insumo`)
-    REFERENCES `st`.`Insumo` (`Cod_Insumo`)
+    FOREIGN KEY (`Codigo_Insumo`)
+    REFERENCES `st`.`Insumo` (`Codigo_Insumo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_InsumoProducto_Producto1`
-    FOREIGN KEY (`Cod_Producto`)
-    REFERENCES `st`.`Producto` (`Cod_Producto`)
+  CONSTRAINT `fk_Compra_Vendedor1`
+    FOREIGN KEY (`Codigo_Empleado`)
+    REFERENCES `st`.`Empleado` (`Codigo_Empleado`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `st`.`VentaProducto`
+-- Table `st`.`Venta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `st`.`VentaProducto` (
-  `Cod_Venta_Producto` INT NOT NULL AUTO_INCREMENT,
-  `Cod_Venta` INT NOT NULL,
-  `Cod_Producto` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `st`.`Venta` (
+  `Codigo_Venta` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Factura` INT NOT NULL,
+  `Codigo_Producto` INT NOT NULL,
   `Cantidad` VARCHAR(45) NOT NULL,
-  `Valor` DOUBLE NOT NULL,
-  PRIMARY KEY (`Cod_Venta_Producto`),
-  INDEX `fk_MovimientoProducto_Movimiento1_idx` (`Cod_Venta` ASC),
-  INDEX `fk_MovimientoProducto_Producto1_idx` (`Cod_Producto` ASC),
+  `Precio` DOUBLE NOT NULL,
+  PRIMARY KEY (`Codigo_Venta`),
+  INDEX `fk_MovimientoProducto_Movimiento1_idx` (`Codigo_Factura` ASC),
+  INDEX `fk_MovimientoProducto_Producto1_idx` (`Codigo_Producto` ASC),
   CONSTRAINT `fk_MovimientoProducto_Movimiento1`
-    FOREIGN KEY (`Cod_Venta`)
-    REFERENCES `st`.`Venta` (`Cod_Venta`)
+    FOREIGN KEY (`Codigo_Factura`)
+    REFERENCES `st`.`Factura` (`Codigo_Factura`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_MovimientoProducto_Producto1`
-    FOREIGN KEY (`Cod_Producto`)
-    REFERENCES `st`.`Producto` (`Cod_Producto`)
+    FOREIGN KEY (`Codigo_Producto`)
+    REFERENCES `st`.`Producto` (`Codigo_Producto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `st`.`Detalle`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `st`.`Detalle` (
+  `Codigo_Detalle` INT NOT NULL AUTO_INCREMENT,
+  `Codigo_Producto` INT NOT NULL,
+  `Codigo_Insumo` INT NOT NULL,
+  `Descripcion` VARCHAR(45) NOT NULL,
+  `Referencia` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`Codigo_Detalle`),
+  INDEX `fk_Detalle_Producto1_idx` (`Codigo_Producto` ASC),
+  INDEX `fk_Detalle_Insumo1_idx` (`Codigo_Insumo` ASC),
+  CONSTRAINT `fk_Detalle_Producto1`
+    FOREIGN KEY (`Codigo_Producto`)
+    REFERENCES `st`.`Producto` (`Codigo_Producto`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Detalle_Insumo1`
+    FOREIGN KEY (`Codigo_Insumo`)
+    REFERENCES `st`.`Insumo` (`Codigo_Insumo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
