@@ -25,7 +25,7 @@ class Cliente(models.Model):
 
 @python_2_unicode_compatible
 class Color(models.Model):
-    codigo_color = models.AutoField(db_column='Codigo_Color', primary_key=True)  
+    codigo_color = models.AutoField(db_column='Codigo_Color', primary_key=True, verbose_name=u"Codigo")  
     nombre = models.CharField(db_column='Nombre', max_length=45)  
     referencia = models.CharField(db_column='Referencia', max_length=45, blank=True,
                                   null=True)  
@@ -47,7 +47,7 @@ class Compra(models.Model):
                                       db_column='Codigo_Insumo',verbose_name=u'Insumo')
     codigo_empleado = models.ForeignKey('Empleado', models.DO_NOTHING,
                                         db_column='Codigo_Empleado',verbose_name=u'Empleado')
-    cantidad = models.CharField(db_column='Cantidad', max_length=45)  
+    cantidad = models.FloatField(db_column='Cantidad', max_length=45)  
     precio = models.FloatField(db_column='Precio')  
     fecha = models.DateField(db_column='Fecha')  
 
@@ -65,9 +65,9 @@ class Compra(models.Model):
 class Detalle(models.Model):
     codigo_detalle = models.AutoField(db_column='Codigo_Detalle', primary_key=True)  
     codigo_producto = models.ForeignKey('Producto', models.DO_NOTHING,
-                                        db_column='Codigo_Producto')  
+                                        db_column='Codigo_Producto', verbose_name=u"Producto")  
     codigo_insumo = models.ForeignKey('Insumo', models.DO_NOTHING,
-                                      db_column='Codigo_Insumo')  
+                                      db_column='Codigo_Insumo', verbose_name=u"Insumo")  
     descripcion = models.CharField(db_column='Descripcion', max_length=45)  
     referencia = models.CharField(db_column='Referencia', max_length=45)  
 
@@ -237,13 +237,21 @@ class Tela(models.Model):
 
 @python_2_unicode_compatible
 class Venta(models.Model):
+
     codigo_venta = models.AutoField(db_column='Codigo_Venta', primary_key=True)  
     codigo_factura = models.ForeignKey(Factura, models.DO_NOTHING,
-                                       db_column='Codigo_Factura')  
+                                       db_column='Codigo_Factura', verbose_name=u"Factura")  
     codigo_producto = models.ForeignKey(Producto, models.DO_NOTHING,
-                                        db_column='Codigo_Producto')  
+                                        db_column='Codigo_Producto', verbose_name=u"Producto")  
     cantidad = models.FloatField(db_column='Cantidad', max_length=45)
-    precio = models.FloatField(db_column='Precio')  
+    precio = models.FloatField(db_column='Precio')
+
+
+    @property
+    def Venta_Total(self):
+        return self.cantidad*self.precio
+
+    total = property(Venta_Total)
 
     def __str__(self):
         return self.codigo_venta
@@ -253,6 +261,8 @@ class Venta(models.Model):
         db_table = 'venta'
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'
+
+
 
 @python_2_unicode_compatible 
 class DjangoMigrations(models.Model):

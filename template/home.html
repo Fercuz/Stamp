@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="../static/font/nunito.css">
         <link rel="stylesheet" href="../static/css/animate.css">
         <link rel="stylesheet" href="../static/css/hover.css">
+        <link rel="stylesheet" href="../static/css/unslider.css">
         <link rel="shortcut icon" type="image/png" href="../static/img/f.png">
         <script src="../static/js/library/modernizr-2.8.3.min.js"></script>
         <script src="../static/js/main.js"></script>
@@ -29,8 +30,9 @@
                      <li><a id="al02" title="Caracteristicas"><i id="i01" class=" icon-price-tags"></i>Caracteristicas</a></li>
                      <li><a id="al03" title="Ayuda" onclick="rd('/static/files/ManualUsuario.pdf')"><i id="i01" class="icon-cog"></i>Ayuda</a></li>
                      <li><a id="al04" title="Contacto" onclick="rd('/contacto')"><i id="i01" class="icon-phone"></i>Contacto</a></li>
-                     <li><a id="al05" title="Acerca"><i id="i01" class="icon-bubbles"></i>Acerca</a></li>
-                     <li><a id="al06" title="Administración" onclick="rd('/admin')"><i id="i01" class="icon-lock"></i>Administración</a></li>
+                     <li><a id="al05" title="Información"><i id="i01" class="icon-address-book"></i>Información</a></li>
+                     <li><a id="al06" title="Acerca"><i id="i01" class="icon-bubbles"></i>Acerca</a></li>
+                     <li><a id="al07" title="Administración" onclick="rd('/admin')"><i id="i01" class="icon-lock"></i>Administración</a></li>
                      </ul>
                 </nav>  
             </div>
@@ -76,13 +78,15 @@
         </article>
 
         <article id="a02">
-            <div id="pl" data-stellar-background-ratio="0.6">
-                <div id="inf02">
-
+            <div id="pl">
+                <div class="slider">
+                    <ul>
+                        <li><img src="../static/img/slider/1.jpg" alt="Image 1"></li>
+                        <li><img src="../static/img/slider/1.jpg" alt="Image 2"></li>
+                    </ul>
                 </div>
             </div>
         </article>
-
         <footer>
             <div id="sn">
                 <i id="i02" title="Siguenos en Twitter" class="icon-twitter3"></i>
@@ -99,15 +103,14 @@
             </div>
         </footer>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../static/js/library/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="../static/js/library/jquery-2.2.4.min.js"></script>
         <script src="../static/js/library/jquery.animatescroll.js"></script>
         <script src="../static/js/library/jquery.waypoints.min.js"></script>
         <script src="../static/js/library/jquery.stellar.js"></script>
         <script src="../static/js/library/jquery.scrollUp.js"></script>
+        <script src="../static/js/library/unslider-min.js"></script>
         <script src="../static/js/library/prefixfree.min.js"></script>
         <script src="../static/js/plugins.js"></script>
-    
         <script>
         $(document).ready(function() {
             $(function () {
@@ -121,6 +124,15 @@
                 scrollText: 'Inicio',
                 activeOverlay: false,
                 });
+
+            });
+
+            $('.slider').unslider({
+                animation: 'vertical',
+                autoplay: true,
+                infinite:true,
+                arrows: false
+
             });
 
             $('#a01').waypoint(function(down){
@@ -148,6 +160,9 @@
               $('#a01').animatescroll();
             });
             $('#al05').click(function(){
+              $('#a02').animatescroll();
+            });
+            $('#al06').click(function(){
               $('footer').animatescroll();
             })
 

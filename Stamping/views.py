@@ -31,16 +31,20 @@ def contacto(request):
     if request.method == 'POST':
         form = Formulario(request.POST)
         if form.is_valid():
-            asunto = form.cleaned_data['asunto']
-            mensaje = form.cleaned_data['mensaje']
-            email = form.cleaned_data['email']
-            ##pendiete
+            # asunto = form.cleaned_data['asunto']
+            # mensaje = form.cleaned_data['mensaje']
+            # email = form.cleaned_data['email']
+            asunto = 'asunto'
+            mensaje = 'mensaje'
+            email = 'email'
             mail = EmailMessage(asunto,mensaje,email)
             mail.send()
+
             return render_to_response('gracias.html', context_instance=RequestContext(request))
     else:
         form = Formulario()
     return render_to_response('contacto.html', {'form': form}, context_instance=RequestContext(request))
+
 
 def gracias(request):
     html = '<html><body><h1>Gracias por enviarnos su comentario!.</h1></body></html>'

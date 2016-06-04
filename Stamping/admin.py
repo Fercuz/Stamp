@@ -31,8 +31,8 @@ class EstiloAdmin(admin.ModelAdmin):
 	search_fields = ('codigo_estilo','nombre',)
 
 class FacturaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
-	search_fields = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
+	readonly_fields = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
+	#search_fields = ('codigo_factura','codigo_cliente','codigo_empleado','fecha','total')
 
 class InsumoAdmin(ImportExportModelAdmin,admin.ModelAdmin):
 	list_display = ('codigo_insumo','nombre','referencia','tipo','fecha_compra','fecha_vencimiento')
@@ -66,3 +66,4 @@ admin.site.register(Talla,TallaAdmin)
 admin.site.register(Tela,TelaAdmin)
 admin.site.register(Venta,VentaAdmin)
 
+ 
