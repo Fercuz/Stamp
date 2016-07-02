@@ -150,6 +150,12 @@ class Factura(models.Model):
     def __str__(self):
         return self.codigo_factura
 
+    def __unicode__(self):
+        return self.codigo_factura
+
+    def Venta_Total(self):
+        return self.cantidad * self.precio
+
     class Meta:
         managed = False
         db_table = 'factura'
@@ -240,9 +246,12 @@ class Venta(models.Model):
 
     codigo_venta = models.AutoField(db_column='Codigo_Venta', primary_key=True)  
     codigo_factura = models.ForeignKey(Factura, models.DO_NOTHING,
-                                       db_column='Codigo_Factura', verbose_name=u"Factura")  
-    codigo_producto = models.ForeignKey(Producto, models.DO_NOTHING,
-                                        db_column='Codigo_Producto', verbose_name=u"Producto")  
+                                       db_column='Codigo_Factura', verbose_name=u"Factura")
+
+    codigo_producto = models.ManyToManyField(Producto, verbose_name=u"Producto")
+
+    '''codigo_producto = models.ForeignKey(Producto, models.DO_NOTHING,
+                                        db_column='Codigo_Producto', verbose_name=u"Producto")  '''
     cantidad = models.FloatField(db_column='Cantidad', max_length=45)
     precio = models.FloatField(db_column='Precio')
 

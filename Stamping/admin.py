@@ -49,21 +49,20 @@ class TelaAdmin(admin.ModelAdmin):
 	list_display = ('codigo_tela','nombre','descripcion')
 
 class VentaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-	list_display = ('codigo_venta','codigo_factura','codigo_producto','cantidad','precio')
+	list_display = ('codigo_venta','codigo_factura','cantidad','precio')
 
 
+
+admin.site.register(Producto,ProductoAdmin)
+#admin.site.register(Empleado,EmpleadoAdmin)
 admin.site.register(Cliente,ClienteAdmin)
-admin.site.register(Color,ColorAdmin)
+admin.site.register(Insumo,InsumoAdmin)
 admin.site.register(Compra,CompraAdmin)
+admin.site.register(Venta,VentaAdmin)
 admin.site.register(Detalle,DetalleAdmin)
-admin.site.register(Empleado,EmpleadoAdmin)
+#admin.site.register(Factura,FacturaAdmin)
 admin.site.register(Estampado,EstampadoAdmin)
 admin.site.register(Estilo,EstiloAdmin)
-admin.site.register(Factura,FacturaAdmin)
-admin.site.register(Insumo,InsumoAdmin)
-admin.site.register(Producto,ProductoAdmin)
+admin.site.register(Color,ColorAdmin)
 admin.site.register(Talla,TallaAdmin)
 admin.site.register(Tela,TelaAdmin)
-admin.site.register(Venta,VentaAdmin)
-
- 

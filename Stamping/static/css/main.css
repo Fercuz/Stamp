@@ -1,7 +1,6 @@
 html {
     margin:0;
     padding:0;
-    overflow: hidden;
     font-family: nunito;
     background-size:cover;
     background-attachment:fixed;
@@ -35,6 +34,10 @@ footer {
     height: 315px;
 
 }
+.htmlf {
+    overflow: hidden;
+}
+
 #ft {
     background: url('../img/fl.png') bottom no-repeat;
     transition: all 3s ease;
@@ -70,6 +73,11 @@ footer {
 
 #hdr {
     background: url('../img/01.jpg') bottom no-repeat;
+    width: 100%;
+    height:1100px;
+}
+#hdrf {
+    background: white;
     width: 100%;
     height:1100px;
 }
@@ -211,7 +219,15 @@ footer {
 
 #i03 {
     text-shadow: 0px 0px 4px rgba(150, 150, 150,0.3);
-    color: rgba(120,204,230,0.9);
+    color: rgb(120,204,230,0.9);
+    font-size: 15px;
+    margin: 2px 7px 2px 2px;
+
+}
+
+#i04 {
+    text-shadow: 0px 0px 4px rgba(150, 150, 150,0.3);
+    color: rgb(255,255,255,1);
     font-size: 15px;
     margin: 2px 7px 2px 2px;
 
@@ -263,7 +279,119 @@ footer {
     text-align: center;
     margin: 0 auto 0 auto;
 }
+#fac {
+    width: 793px;
+    height: 1155px;
+    color: #4dc3ff;
+    text-align: center;
+    background: url('../img/04.jpg');
+    border-radius: 5px;
+    margin: 45px auto 0px auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0,0.2);
+    text-shadow: 0px 1px 3px rgba(120,204,230,0.7);
 
+}
+#fac_01 {
+    width: inherit;
+    height: 100px;
+    color: rgba(120,204,230,1);
+    text-align: center;
+    border-radius: 5px;
+    margin: 0px auto 0px auto;
+    float: left;
+}
+#fac_02 {
+    width: inherit;
+    height: 70px;
+    color:  rgba(120,204,230,1);
+    text-align: center;
+    border-radius: 5px;
+    margin: 0px auto 0px auto;
+    float: left;
+}
+
+#fac_03 {
+    width: 702px;
+    height: 725px;
+    color:  rgba(120,204,230,1);
+    background: rgba(255,255,255,0.4);
+    margin: 10px 10px 20px 45px;
+    text-align: center;
+    border-radius: 10px;
+    float: left;
+}
+#fac_04 {
+    width: inherit;
+    height: 100px;
+    color: #4dc3ff;
+    border-radius: 5px;
+    margin: 0px auto 0px auto;
+    float: right;
+    text-align: right;
+}
+#fecha{
+    background: url('../img/e.png')no-repeat center;
+    margin-left: 45px;
+    height: 95px;
+    width: 190px;
+    float: left;
+}
+#factura {
+    background: url('../img/e.png')no-repeat center;
+    margin-right: 40px;
+    height: 95px;
+    width: 190px;
+    float: right;
+}
+
+#comprador {
+    margin-left: 50px;
+    height: inherit;
+    width: 190px;
+    float: left;
+    text-align: left;
+}
+
+#cedula {
+    height: inherit;
+    width: 190px;
+    float: left;
+    text-align: left;
+}
+
+#vendedor {
+    margin-left: 50px;
+    color:white;
+    height: inherit;
+    width: 190px;
+    float: left;
+    text-align: left;
+}
+
+#total {
+    margin-right: 50px;
+    color:white;
+    height: inherit;
+    width: 190px;
+    float: right;
+    text-align: right;
+}
+
+#fec {
+    text-align: right;
+    margin: 5px 25px 5px 5px;
+}
+
+#fecha a  {
+    position: relative;
+    top:32px;
+  
+}
+
+#factura a {
+    position: relative;
+    top:32px;
+}
 #ctc input{
     border-radius: 5px;
     border-style: none;
@@ -405,6 +533,13 @@ footer {
     background: url('../img/ico.png') -1px -1px no-repeat;
 }
 
+#space {
+    width: 100%;
+    height:150px;
+}
+
+
+
 /* Form Admin */
 
 #id_email {
@@ -414,16 +549,16 @@ footer {
     text-align: center;
 }
 
-#id_asunto {
+#id_titulo {
     width: 100%;
     height: 30px;
     color: #4dc3ff;
     text-align: center;
 }
 
-#id_mensaje {
+#id_texto {
     width: 350px;
-    height: 200px;
+    height: 165px;
     color: #4dc3ff;
     text-align: center;
     margin: 0 auto 0 auto;

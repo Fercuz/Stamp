@@ -8,6 +8,6 @@ urlpatterns = (
     url(r'^$', Stamping.views.index, name='index'),
     url(r'^local/', Stamping.views.local, name='local'),
     url(r'^contacto/$', Stamping.views.contacto, name='contacto'),
-    url(r'^gracias/$', Stamping.views.gracias, name='gracias'),
+    url(r'^factura/$', Stamping.views.factura_view, name='factura'),
 
 )

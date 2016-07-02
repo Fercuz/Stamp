@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js htmlf" lang="es">
+<html class="no-js" lang="es">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">Estas utilizando un navegador incompatible. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> para mejorar la experiencia.</p>
         <![endif]-->
-        <div id="hdr">
+        <div id="hdrf">
             <div id="nav">
                 <div id="l" class="hvr-hang"></div>
                 <nav>
@@ -30,22 +30,38 @@
                 </nav>
             </div>
             <header>
-                <figure class="animated" id="crle1"><div id="p"></div></figure>
-                <div id="ctc">
-                    {% if info_send %}
-                        <h1 class="animated bounceInDown" id="h01">¡Gracias por enviar tu comentario!</h1>
-                    {% else %}
-                        <h1 class="animated bounceInDown" id="h01">Tu opinión es importante para nosotros,</h1> <h1 class="animated bounceInLeft" id="h02">Envíanos tu comentario!.</h1>
-                        <form id="formulario" class="animated"role="form" action="." method="post">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit">Enviar</button>
-                        </form>
-                    {% endif %}
+                <div id="fac">
+                    <div id="space"> </div>
+                    <div id="fac_01">
+                        <div id="fecha">
+                            <a><i id="i03" class="icon-calendar2"></i>15/03/2016</a>
+                        </div> 
+                        <div id="factura">
+                            <a><i id="i03" class="icon-ticket"></i>0001FCT</a>
+                        </div> 
+                    </div>
+                    <div id="fac_02">
+                        <div id="comprador">
+                            <a><i id="i03" class="icon-user"></i>Comprador <br>Mateo Álvarez García</a>
+                        </div>
+                        <div id="cedula">
+                            <a>C.C <br>1039463728</a>
+                        </div>
+                    </div>
+                    <div id="fac_03">
+                        
+                    </div>   
+                    <div id="fac_04">
+                        <div id="vendedor">
+                            <a><i id="i03" class="icon-user"></i>Vendedor <br>Juan Carlos Mendoza</a>
+                        </div>
+                        <div id="total">
+                            <a><i id="i03" class="icon-banknote"></i>Total<br>124.000 $</a>
+                        </div>
+                    </div>   
                 </div>
             </header>
         </div>
-
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="../static/js/library/jquery-1.11.2.min.js"><\/script>')</script>
         <script src="../static/js/library/prefixfree.min.js"></script>
@@ -53,18 +69,7 @@
         <script>
         $(document).ready(function() {
 
-                var t= setTimeout(function(){
-                    $("#crle1").css({"visibility":"visible"}).addClass("fadeInDown");
-                },200);
-                var t= setTimeout(function(){
-                    $("#h01").css({"visibility":"visible"}).addClass("fadeInRightBig");
-                },300);
-                var t= setTimeout(function(){
-                    $("#h02").css({"visibility":"visible"}).addClass("fadeInLeftBig");
-                },500);
-                var t= setTimeout(function(){
-                    $("#formulario").css({"visibility":"visible"}).addClass("fadeInDown");
-                },700);     
+      
         });
         </script>
         <!--<script> Google Analytics: change UA-XXXXX-X to be your site's ID.

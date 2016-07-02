@@ -74,6 +74,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Language
 
 LANGUAGE_CODE = 'es-CO'
@@ -89,8 +90,7 @@ USE_TZ = True
 # Static files
 
 STATIC_URL = "/static/"
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-#MEDIA_URL = "/media/"
+MEDIA_URL = "/media/"
 #MEDIA_ROOT = "/home/user/app_root/media/"
 #STATIC_ROOT = "/home/user/app_root/static/"
 

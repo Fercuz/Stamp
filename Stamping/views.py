@@ -8,8 +8,11 @@ from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.template.context import RequestContext
 # from django.shortcuts import HttpResponseRedirect
-from Stamping.forms import Formulario
+from Stamping.forms import Contacto_Form
+from Stamping.forms import Factura_Form
 from django.core.mail import EmailMultiAlternatives,EmailMessage
+from django.contrib.admin.views.decorators import staff_member_required
+from Stamping.models import *
 
 
 def handler404(request):
@@ -34,26 +37,21 @@ def contacto(request):
     texto = ""
 
     if request.method == 'POST':
-        form = Formulario(request.POST)
+        form = Contacto_Form(request.POST)
         if form.is_valid():
             info_send = True
             email = form.cleaned_data['email']
             titulo = form.cleaned_data['titulo']
             texto = form.cleaned_data['texto']
-
             to_admin = 'soportestamping@gmail.com'
             html_content = "Información recibida de [%s]<br><br>Mensaje:<br><br>%s"%(email,texto)
             msg = EmailMultiAlternatives('Correo de Contacto', html_content,'from@server.com',[to_admin])
             msg.attach_alternative(html_content,'text/html')
             msg.send()
     else:
-        form = Formulario()
+        form = Contacto_Form()
     ctx = {'form':form, 'email':email,'titulo':titulo, 'texto':texto,'info_send':info_send}
     return render_to_response('contacto.html',ctx, context_instance=RequestContext(request))
-
-def gracias(request):
-    html = '<html><body><h1>Gracias por enviarnos su comentario!.</h1></body></html>'
-    return HttpResponse(html)
 
 def local(request):
     return render_to_response('home.html', context_instance=RequestContext(request))
@@ -63,3 +61,8 @@ def ayuda(request):
 
 def acerca(request):
     return render_to_response('help.html', context_instance=RequestContext(request))
+
+def factura_view(request):
+    factura = Color.objects.all()
+    return render_to_response('factura/factura.html',{'Producto': factura},RequestContext(request, {}),)
+    #factura_view= staff_member_required(factura_view)
