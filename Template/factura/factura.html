@@ -6,54 +6,93 @@
         <title> Stamping </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../static/css/normalize.css">
-        <link rel="stylesheet" href="../static/css/main.css">
-        <link rel="stylesheet" href="../static/icon/icon.css">
-        <link rel="stylesheet" href="../static/font/nunito.css">
-        <link rel="stylesheet" href="../static/css/animate.css">
-        <link rel="stylesheet" href="../static/css/hover.css">
-        <link rel="shortcut icon" type="image/png" href="../static/img/f.png">
-        <script src="../static/js/library/modernizr-2.8.3.min.js"></script>
-        <script src="../static/js/main.js"></script>
+        <link rel="stylesheet" href="../../../static/css/normalize.css">
+        <link rel="stylesheet" href="../../../static/css/main.css">
+        <link rel="stylesheet" href="../../../static/icon/icon.css">
+        <link rel="stylesheet" href="../../../static/font/nunito.css">
+        <link rel="stylesheet" href="../../../static/css/animate.css">
+        <link rel="stylesheet" href="../../../static/css/hover.css">
+        <link rel="shortcut icon" type="image/png" href="../../../static/img/f.png">
+        <script src="../../../static/js/library/modernizr-2.8.3.min.js"></script>
+        <script src="../../../static/js/main.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">Estas utilizando un navegador incompatible. Por favor <a href="http://browsehappy.com/">actualiza tu navegador</a> para mejorar la experiencia.</p>
         <![endif]-->
-        <div id="hdrf">
+        <div >
             <div id="nav">
                 <div id="l" class="hvr-hang"></div>
                 <nav>
                      <ul>
                         <li><a id="al03" title="Atras" onclick="rd('/local/')"><i id="i03" class="icon-home3"></i>Inicio</a></li>
+                            {% if prod %}
+                                <li><a id="al03" href="/facturas/pagina/1/"><i id="i03" class="icon-arrow-left"></i>Primero</a></li>
+                                {% if prod.has_previous %}
+                                    <li><a id="al03" href="/facturas/pagina/{{ prod.previous_page_number }}/"><i id="i03" class="icon-arrow-left2"></i>Anterior</a></li>
+                                {% else %}
+                                    <li><a id="al03" href="#"><i id="i03" class="icon-arrow-left2"></i>Anterior</a></li>
+                                {% endif %}
+
+                                {% if prod.has_next %}
+                                    <li><a id="al03" href="/facturas/pagina/{{ prod.next_page_number }}/">Siguiente<i id="i03" class="icon-arrow-right2"></i></a></li>
+                                {% else %}
+                                    <li><a id="al03" href="#">Siguiente<i id="i03" class="icon-arrow-right2"></i></a></li>
+                                {% endif %}
+                                <li><a id="al03"  href="/facturas/pagina/{{ prod.paginator.num_pages}}/">Ultimo<i id="i03" class="icon-arrow-right"></i></a></li>
+                            {% endif %}
                      </ul>
                 </nav>
             </div>
-            <header>
+            <header id="hdrf">
+                <div id="pag01">
+                    <a>Pagina {{prod.number}} de {{ prod.paginator.num_pages}}</a>
+                </div>
                 <div id="fac">
                     <div id="space"> </div>
                     <div id="fac_01">
                         <div id="fecha">
-                            <a><i id="i03" class="icon-calendar2"></i>15/03/2016</a>
+                            <a><i id="i03" class="icon-calendar2"></i><!--{{ fac.fecha}}--></a>
                         </div> 
                         <div id="factura">
-                            <a><i id="i03" class="icon-ticket"></i>0001FCT</a>
+                            <a><i id="i03" class="icon-ticket"></i><!--{{ fac.codigo_factura }}--></a>
                         </div> 
                     </div>
                     <div id="fac_02">
                         <div id="comprador">
-                            <a><i id="i03" class="icon-user"></i>Comprador <br>Mateo Álvarez García</a>
+                            <a><i id="i03" class="icon-user"></i>Comprador <br>{{ cli.nombre }} {{ cli.apellido }}</a>
                         </div>
                         <div id="cedula">
-                            <a>C.C <br>1039463728</a>
+                            <a>C.C <br>{{ cli.cedula }}</a>
                         </div>
                     </div>
                     <div id="fac_03">
-                        
+                        <p>{{frm}}</p> 
+                        <h1> Productos </h1>
+                            {% if prod %}
+                                <table id="tg">
+                                    <tr>
+                                        <th><i id="i03" class="icon-briefcase"></i><a>Nombre</a></th>
+                                        <th><i id="i03" class="icon-ticket"></i><a>Descripción</a></th>
+                                        <th><i id="i03" class="icon-notification"></i><a>Cantidad</a></th>
+                                        <th><i id="i03" class="icon-banknote"></i><a>Precio</a></th>
+                                    </tr>
+                                <tr>
+                                    {% for p in prod %}
+                                        <td><a>{{ p.nombre}}</a></td>
+                                        <td><a>{{ p.descripcion}}</a><br></td>
+                                        <td><a></a></td>
+                                        <td><a>{{ p.precio}}</a></td>
+                                     {% endfor %}
+                                </tr>
+                                </table>
+                            {% else %}
+                                    <p>No se encontraron facturas. </p>
+                            {% endif %}
                     </div>   
                     <div id="fac_04">
                         <div id="vendedor">
-                            <a><i id="i03" class="icon-user"></i>Vendedor <br>Juan Carlos Mendoza</a>
+                            <a><i id="i03" class="icon-user"></i>Vendedor <br>{{ usr }}</a>
                         </div>
                         <div id="total">
                             <a><i id="i03" class="icon-banknote"></i>Total<br>124.000 $</a>
@@ -63,9 +102,9 @@
             </header>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../static/js/library/jquery-1.11.2.min.js"><\/script>')</script>
-        <script src="../static/js/library/prefixfree.min.js"></script>
-        <script src="../static/js/plugins.js"></script>
+        <script>window.jQuery || document.write('<script src="../../static/js/library/jquery-1.11.2.min.js"><\/script>')</script>
+        <script src="../../static/js/library/prefixfree.min.js"></script>
+        <script src="../../static/js/plugins.js"></script>
         <script>
         $(document).ready(function() {
 

@@ -1,24 +1,9 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2016 a las 00:14:08
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 7.0.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `st`
---
+CREATE DATABASE IF NOT EXISTS `st` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `st`;
 
 -- --------------------------------------------------------
 
@@ -88,21 +73,21 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (25, 'Can add Compra', 9, 'add_compra'),
 (26, 'Can change Compra', 9, 'change_compra'),
 (27, 'Can delete Compra', 9, 'delete_compra'),
-(28, 'Can add Detalle', 10, 'add_detalle'),
-(29, 'Can change Detalle', 10, 'change_detalle'),
-(30, 'Can delete Detalle', 10, 'delete_detalle'),
-(31, 'Can add Empleado', 11, 'add_empleado'),
-(32, 'Can change Empleado', 11, 'change_empleado'),
-(33, 'Can delete Empleado', 11, 'delete_empleado'),
-(34, 'Can add Estampado', 12, 'add_estampado'),
-(35, 'Can change Estampado', 12, 'change_estampado'),
-(36, 'Can delete Estampado', 12, 'delete_estampado'),
-(37, 'Can add Estilo', 13, 'add_estilo'),
-(38, 'Can change Estilo', 13, 'change_estilo'),
-(39, 'Can delete Estilo', 13, 'delete_estilo'),
-(40, 'Can add Factura', 14, 'add_factura'),
-(41, 'Can change Factura', 14, 'change_factura'),
-(42, 'Can delete Factura', 14, 'delete_factura'),
+(28, 'Can add Detalle Compra', 10, 'add_detallecompra'),
+(29, 'Can change Detalle Compra', 10, 'change_detallecompra'),
+(30, 'Can delete Detalle Compra', 10, 'delete_detallecompra'),
+(31, 'Can add Detalle Insumo', 11, 'add_detalleinsumo'),
+(32, 'Can change Detalle Insumo', 11, 'change_detalleinsumo'),
+(33, 'Can delete Detalle Insumo', 11, 'delete_detalleinsumo'),
+(34, 'Can add Detalle Venta', 12, 'add_detalleventa'),
+(35, 'Can change Detalle Venta', 12, 'change_detalleventa'),
+(36, 'Can delete Detalle Venta', 12, 'delete_detalleventa'),
+(37, 'Can add Estampado', 13, 'add_estampado'),
+(38, 'Can change Estampado', 13, 'change_estampado'),
+(39, 'Can delete Estampado', 13, 'delete_estampado'),
+(40, 'Can add Estilo', 14, 'add_estilo'),
+(41, 'Can change Estilo', 14, 'change_estilo'),
+(42, 'Can delete Estilo', 14, 'delete_estilo'),
 (43, 'Can add Insumo', 15, 'add_insumo'),
 (44, 'Can change Insumo', 15, 'change_insumo'),
 (45, 'Can delete Insumo', 15, 'delete_insumo'),
@@ -147,7 +132,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$24000$xFwYHf7FClGw$wRJcbYtGi561+NuLoOY9c9rhqM0Z9FTsTI4Nvs+fziU=', '2016-05-25 22:13:11', 1, 'root', '', '', 'root@root.com', 1, 1, '2016-05-25 22:12:48');
+(1, 'pbkdf2_sha256$24000$fyUxx44gTnoq$Fj9QpPNbiPFCK0P+MUhtzJWSLB0hVdkB6L2f/XBCVkA=', NULL, 1, 'Administrador', '', '', 'admin@admin.com', 1, 1, '2016-07-08 15:43:31');
 
 -- --------------------------------------------------------
 
@@ -211,25 +196,49 @@ CREATE TABLE `color` (
 
 CREATE TABLE `compra` (
   `Codigo_Compra` int(11) NOT NULL,
-  `Codigo_Insumo` int(11) NOT NULL,
-  `Codigo_Empleado` int(11) NOT NULL,
-  `Cantidad` varchar(45) NOT NULL,
-  `Precio` double NOT NULL,
-  `Fecha` date NOT NULL
+  `Comprador` varchar(45) NOT NULL,
+  `Fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle`
+-- Estructura de tabla para la tabla `detallecompra`
 --
 
-CREATE TABLE `detalle` (
-  `Codigo_Detalle` int(11) NOT NULL,
+CREATE TABLE `detallecompra` (
+  `Codigo_Detalle_Compra` int(11) NOT NULL,
+  `Codigo_Compra` int(11) NOT NULL,
+  `Codigo_Insumo` int(11) NOT NULL,
+  `Cantidad` decimal(10,0) NOT NULL,
+  `Precio` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleinsumo`
+--
+
+CREATE TABLE `detalleinsumo` (
+  `Codigo_Detalle_Insumo` int(11) NOT NULL,
   `Codigo_Producto` int(11) NOT NULL,
   `Codigo_Insumo` int(11) NOT NULL,
-  `Descripcion` varchar(45) NOT NULL,
-  `Referencia` varchar(45) NOT NULL
+  `Descripcion` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleventa`
+--
+
+CREATE TABLE `detalleventa` (
+  `Codigo_Detalle_Venta` int(11) NOT NULL,
+  `Codigo_Venta` int(11) NOT NULL,
+  `Codigo_Producto` int(11) NOT NULL,
+  `Cantidad` decimal(10,0) NOT NULL,
+  `Precio` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -275,12 +284,12 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (7, 'Stamping', 'cliente'),
 (8, 'Stamping', 'color'),
 (9, 'Stamping', 'compra'),
-(10, 'Stamping', 'detalle'),
+(10, 'Stamping', 'detallecompra'),
+(11, 'Stamping', 'detalleinsumo'),
+(12, 'Stamping', 'detalleventa'),
 (20, 'Stamping', 'djangomigrations'),
-(11, 'Stamping', 'empleado'),
-(12, 'Stamping', 'estampado'),
-(13, 'Stamping', 'estilo'),
-(14, 'Stamping', 'factura'),
+(13, 'Stamping', 'estampado'),
+(14, 'Stamping', 'estilo'),
 (15, 'Stamping', 'insumo'),
 (16, 'Stamping', 'producto'),
 (17, 'Stamping', 'talla'),
@@ -305,18 +314,18 @@ CREATE TABLE `django_migrations` (
 --
 
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
-(1, 'contenttypes', '0001_initial', '2016-05-25 22:10:40'),
-(2, 'auth', '0001_initial', '2016-05-25 22:10:47'),
-(3, 'admin', '0001_initial', '2016-05-25 22:10:48'),
-(4, 'admin', '0002_logentry_remove_auto_add', '2016-05-25 22:10:48'),
-(5, 'contenttypes', '0002_remove_content_type_name', '2016-05-25 22:10:49'),
-(6, 'auth', '0002_alter_permission_name_max_length', '2016-05-25 22:10:50'),
-(7, 'auth', '0003_alter_user_email_max_length', '2016-05-25 22:10:50'),
-(8, 'auth', '0004_alter_user_username_opts', '2016-05-25 22:10:51'),
-(9, 'auth', '0005_alter_user_last_login_null', '2016-05-25 22:10:51'),
-(10, 'auth', '0006_require_contenttypes_0002', '2016-05-25 22:10:51'),
-(11, 'auth', '0007_alter_validators_add_error_messages', '2016-05-25 22:10:51'),
-(12, 'sessions', '0001_initial', '2016-05-25 22:10:52');
+(1, 'contenttypes', '0001_initial', '2016-07-08 15:41:25'),
+(2, 'auth', '0001_initial', '2016-07-08 15:41:33'),
+(3, 'admin', '0001_initial', '2016-07-08 15:41:36'),
+(4, 'admin', '0002_logentry_remove_auto_add', '2016-07-08 15:41:36'),
+(5, 'contenttypes', '0002_remove_content_type_name', '2016-07-08 15:41:38'),
+(6, 'auth', '0002_alter_permission_name_max_length', '2016-07-08 15:41:39'),
+(7, 'auth', '0003_alter_user_email_max_length', '2016-07-08 15:41:40'),
+(8, 'auth', '0004_alter_user_username_opts', '2016-07-08 15:41:40'),
+(9, 'auth', '0005_alter_user_last_login_null', '2016-07-08 15:41:42'),
+(10, 'auth', '0006_require_contenttypes_0002', '2016-07-08 15:41:43'),
+(11, 'auth', '0007_alter_validators_add_error_messages', '2016-07-08 15:41:43'),
+(12, 'sessions', '0001_initial', '2016-07-08 15:41:48');
 
 -- --------------------------------------------------------
 
@@ -328,32 +337,6 @@ CREATE TABLE `django_session` (
   `session_key` varchar(40) NOT NULL,
   `session_data` longtext NOT NULL,
   `expire_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `django_session`
---
-
-INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('s6pbtl03pbht2w8c1syqpns3n6is65yd', 'ODE0MDEzMWU0ZTkzM2M2MDhkNTczYzliZmRlYTI0ZWM1NThkMjhjNTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiODQ3OGI2Mzc2OGUyMTkxOTdjNjI5NmZkMTJjMTA3ZTQ1Y2M5ZjdkNiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2016-06-08 22:13:11');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `empleado`
---
-
-CREATE TABLE `empleado` (
-  `Codigo_Empleado` int(11) NOT NULL,
-  `Cedula` varchar(45) NOT NULL,
-  `Nombre` varchar(45) NOT NULL,
-  `Apellido` varchar(45) NOT NULL,
-  `Fecha_Nacimiento` date NOT NULL,
-  `Fecha_Contratacion` date NOT NULL,
-  `Telefono` varchar(45) NOT NULL,
-  `Direccion` varchar(45) NOT NULL,
-  `Movil` varchar(45) DEFAULT NULL,
-  `Email` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -383,28 +366,14 @@ CREATE TABLE `estilo` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `factura`
---
-
-CREATE TABLE `factura` (
-  `Codigo_Factura` int(11) NOT NULL,
-  `Codigo_Cliente` int(11) NOT NULL,
-  `Codigo_Empleado` int(11) NOT NULL,
-  `Fecha` date NOT NULL,
-  `Total` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `insumo`
 --
 
 CREATE TABLE `insumo` (
   `Codigo_Insumo` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
-  `Referencia` varchar(45) NOT NULL,
-  `Tipo` varchar(45) NOT NULL,
+  `Referencia` varchar(45) DEFAULT NULL,
+  `Tipo` varchar(45) DEFAULT NULL,
   `Fecha_Compra` date NOT NULL,
   `Fecha_Vencimiento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -423,8 +392,8 @@ CREATE TABLE `producto` (
   `Codigo_Color` int(11) NOT NULL,
   `Codigo_Estampado` int(11) NOT NULL,
   `Nombre` varchar(45) NOT NULL,
-  `Precio` int(11) NOT NULL,
-  `Stock` int(11) NOT NULL,
+  `Precio` double NOT NULL,
+  `Stock` decimal(10,0) NOT NULL,
   `Descripcion` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -460,10 +429,9 @@ CREATE TABLE `tela` (
 
 CREATE TABLE `venta` (
   `Codigo_Venta` int(11) NOT NULL,
-  `Codigo_Factura` int(11) NOT NULL,
-  `Codigo_Producto` int(11) NOT NULL,
-  `Cantidad` varchar(45) NOT NULL,
-  `Precio` double NOT NULL
+  `Codigo_Cliente` int(11) NOT NULL,
+  `Vendedor` varchar(45) NOT NULL,
+  `Fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -531,17 +499,31 @@ ALTER TABLE `color`
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`Codigo_Compra`),
-  ADD KEY `fk_Producto_has_Insumo_Insumo1_idx` (`Codigo_Insumo`),
-  ADD KEY `fk_Compra_Vendedor1_idx` (`Codigo_Empleado`);
+  ADD PRIMARY KEY (`Codigo_Compra`);
 
 --
--- Indices de la tabla `detalle`
+-- Indices de la tabla `detallecompra`
 --
-ALTER TABLE `detalle`
-  ADD PRIMARY KEY (`Codigo_Detalle`),
-  ADD KEY `fk_Detalle_Producto1_idx` (`Codigo_Producto`),
-  ADD KEY `fk_Detalle_Insumo1_idx` (`Codigo_Insumo`);
+ALTER TABLE `detallecompra`
+  ADD PRIMARY KEY (`Codigo_Detalle_Compra`,`Codigo_Compra`),
+  ADD KEY `fk_Detalle_Insumo1_idx` (`Codigo_Insumo`),
+  ADD KEY `fk_DetalleCompra_Compra1_idx` (`Codigo_Compra`);
+
+--
+-- Indices de la tabla `detalleinsumo`
+--
+ALTER TABLE `detalleinsumo`
+  ADD PRIMARY KEY (`Codigo_Detalle_Insumo`,`Codigo_Producto`),
+  ADD KEY `fk_Detalle_Insumo1_idx` (`Codigo_Insumo`),
+  ADD KEY `fk_Detalle_Producto1_idx` (`Codigo_Producto`);
+
+--
+-- Indices de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD PRIMARY KEY (`Codigo_Detalle_Venta`,`Codigo_Venta`),
+  ADD KEY `fk_MovimientoProducto_Producto1_idx` (`Codigo_Producto`),
+  ADD KEY `fk_Venta_Factura1_idx` (`Codigo_Venta`);
 
 --
 -- Indices de la tabla `django_admin_log`
@@ -572,12 +554,6 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_de54fa62` (`expire_date`);
 
 --
--- Indices de la tabla `empleado`
---
-ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`Codigo_Empleado`);
-
---
 -- Indices de la tabla `estampado`
 --
 ALTER TABLE `estampado`
@@ -588,14 +564,6 @@ ALTER TABLE `estampado`
 --
 ALTER TABLE `estilo`
   ADD PRIMARY KEY (`Codigo_Estilo`);
-
---
--- Indices de la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD PRIMARY KEY (`Codigo_Factura`),
-  ADD KEY `fk_Movimiento_Persona1_idx` (`Codigo_Cliente`),
-  ADD KEY `fk_Factura_Vendedor1_idx` (`Codigo_Empleado`);
 
 --
 -- Indices de la tabla `insumo`
@@ -631,8 +599,7 @@ ALTER TABLE `tela`
 --
 ALTER TABLE `venta`
   ADD PRIMARY KEY (`Codigo_Venta`),
-  ADD KEY `fk_MovimientoProducto_Movimiento1_idx` (`Codigo_Factura`),
-  ADD KEY `fk_MovimientoProducto_Producto1_idx` (`Codigo_Producto`);
+  ADD KEY `fk_Factura_Cliente1_idx` (`Codigo_Cliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -684,10 +651,20 @@ ALTER TABLE `color`
 ALTER TABLE `compra`
   MODIFY `Codigo_Compra` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `detalle`
+-- AUTO_INCREMENT de la tabla `detallecompra`
 --
-ALTER TABLE `detalle`
-  MODIFY `Codigo_Detalle` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `detallecompra`
+  MODIFY `Codigo_Detalle_Compra` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `detalleinsumo`
+--
+ALTER TABLE `detalleinsumo`
+  MODIFY `Codigo_Detalle_Insumo` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  MODIFY `Codigo_Detalle_Venta` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `django_admin_log`
 --
@@ -704,11 +681,6 @@ ALTER TABLE `django_content_type`
 ALTER TABLE `django_migrations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
--- AUTO_INCREMENT de la tabla `empleado`
---
-ALTER TABLE `empleado`
-  MODIFY `Codigo_Empleado` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `estampado`
 --
 ALTER TABLE `estampado`
@@ -718,11 +690,6 @@ ALTER TABLE `estampado`
 --
 ALTER TABLE `estilo`
   MODIFY `Codigo_Estilo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `factura`
---
-ALTER TABLE `factura`
-  MODIFY `Codigo_Factura` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `insumo`
 --
@@ -780,18 +747,25 @@ ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
--- Filtros para la tabla `compra`
+-- Filtros para la tabla `detallecompra`
 --
-ALTER TABLE `compra`
-  ADD CONSTRAINT `fk_Compra_Vendedor1` FOREIGN KEY (`Codigo_Empleado`) REFERENCES `empleado` (`Codigo_Empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Producto_has_Insumo_Insumo1` FOREIGN KEY (`Codigo_Insumo`) REFERENCES `insumo` (`Codigo_Insumo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `detallecompra`
+  ADD CONSTRAINT `fk_DetalleCompra_Compra1` FOREIGN KEY (`Codigo_Compra`) REFERENCES `compra` (`Codigo_Compra`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Detalle_Insumo10` FOREIGN KEY (`Codigo_Insumo`) REFERENCES `insumo` (`Codigo_Insumo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `detalle`
+-- Filtros para la tabla `detalleinsumo`
 --
-ALTER TABLE `detalle`
+ALTER TABLE `detalleinsumo`
   ADD CONSTRAINT `fk_Detalle_Insumo1` FOREIGN KEY (`Codigo_Insumo`) REFERENCES `insumo` (`Codigo_Insumo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Detalle_Producto1` FOREIGN KEY (`Codigo_Producto`) REFERENCES `producto` (`Codigo_Producto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `detalleventa`
+--
+ALTER TABLE `detalleventa`
+  ADD CONSTRAINT `fk_MovimientoProducto_Producto1` FOREIGN KEY (`Codigo_Producto`) REFERENCES `producto` (`Codigo_Producto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Venta_Factura1` FOREIGN KEY (`Codigo_Venta`) REFERENCES `venta` (`Codigo_Venta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `django_admin_log`
@@ -799,13 +773,6 @@ ALTER TABLE `detalle`
 ALTER TABLE `django_admin_log`
   ADD CONSTRAINT `django_admin__content_type_id_c4bce8eb_fk_django_content_type_id` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
-
---
--- Filtros para la tabla `factura`
---
-ALTER TABLE `factura`
-  ADD CONSTRAINT `fk_Factura_Vendedor1` FOREIGN KEY (`Codigo_Empleado`) REFERENCES `empleado` (`Codigo_Empleado`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Movimiento_Persona1` FOREIGN KEY (`Codigo_Cliente`) REFERENCES `cliente` (`Codigo_Cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `producto`
@@ -821,8 +788,12 @@ ALTER TABLE `producto`
 -- Filtros para la tabla `venta`
 --
 ALTER TABLE `venta`
-  ADD CONSTRAINT `fk_MovimientoProducto_Movimiento1` FOREIGN KEY (`Codigo_Factura`) REFERENCES `factura` (`Codigo_Factura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_MovimientoProducto_Producto1` FOREIGN KEY (`Codigo_Producto`) REFERENCES `producto` (`Codigo_Producto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Factura_Cliente1` FOREIGN KEY (`Codigo_Cliente`) REFERENCES `cliente` (`Codigo_Cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+--
+-- Base de datos: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
