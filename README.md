@@ -10,11 +10,11 @@ ________________________________________________________________________________
 
 Developers : 
 
-Duvan Arley Novoa - 
-Mateo Álvarez García
+Mateo Álvarez García - 
+Duvan Arley Novoa
 
 ____________________________________________________________________________________________
 
-
 Thanks a lot for fork and contribute to the development.
+Muchas gracias por forkear y contribuir al desarrollo de esta aplicacion.
 ____________________________________________________________________________________________
