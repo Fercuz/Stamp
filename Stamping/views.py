@@ -50,9 +50,12 @@ def factura_view(request,pag):
     producto = Producto.objects.all()
     prd = Producto.objects.get(codigo_producto=1)
     factura_list = Producto.objects.all()
+    ven = Venta.objects.get(codigo_venta=7)
+
     cliente = Cliente.objects.get(codigo_cliente=1)
-    usuario = request.user
     paginator = Paginator(factura_list,1)
+    total = 2+3000.
+    #np = Venta.objects.get()
 
     try:
         page = int(pag)
@@ -64,10 +67,10 @@ def factura_view(request,pag):
         factura = paginator.page(paginator.num_pages)
 
     #ctx = {'prod': producto,'fac':factura,'cli':cliente,'usr': usuario}
-    ctx = {'prod': factura}
+    ctx = {'prod': factura,'venta': ven,'tot': total}
 
     return render_to_response('factura/factura.html',ctx,context_instance=RequestContext(request))
- 
+
 
 def factura_single_view(request, id_fac):
     factura = Producto.objects.get(codigo_producto=id_fac)

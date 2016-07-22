@@ -35,11 +35,11 @@
                                 {% endif %}
 
                                 {% if prod.has_next %}
-                                    <li><a id="al03" href="/facturas/pagina/{{ prod.next_page_number }}/">Siguiente<i id="i03" class="icon-arrow-right2"></i></a></li>
+                                    <li><a id="al03" href="/facturas/pagina/{{ prod.next_page_number }}/">Siguiente <i id="i03" class="icon-arrow-right2"></i></a></li>
                                 {% else %}
-                                    <li><a id="al03" href="#">Siguiente<i id="i03" class="icon-arrow-right2"></i></a></li>
+                                    <li><a id="al03" href="#"> Siguiente<i id="i03" class="icon-arrow-right2"></i></a></li>
                                 {% endif %}
-                                <li><a id="al03"  href="/facturas/pagina/{{ prod.paginator.num_pages}}/">Ultimo<i id="i03" class="icon-arrow-right"></i></a></li>
+                                <li><a id="al03"  href="/facturas/pagina/{{ prod.paginator.num_pages}}/">Ultimo <i id="i03" class="icon-arrow-right"></i></a></li>
                             {% endif %}
                      </ul>
                 </nav>
@@ -52,10 +52,10 @@
                     <div id="space"> </div>
                     <div id="fac_01">
                         <div id="fecha">
-                            <a><i id="i03" class="icon-calendar2"></i><!--{{ fac.fecha}}--></a>
+                            <a><i id="i03" class="icon-calendar2"></i>{{ venta.fecha}}</a>
                         </div> 
                         <div id="factura">
-                            <a><i id="i03" class="icon-ticket"></i><!--{{ fac.codigo_factura }}--></a>
+                            <a><i id="i03" class="icon-ticket"></i>0X{{ venta.codigo_venta }}FCT</a>
                         </div> 
                     </div>
                     <div id="fac_02">
@@ -92,10 +92,10 @@
                     </div>   
                     <div id="fac_04">
                         <div id="vendedor">
-                            <a><i id="i03" class="icon-user"></i>Vendedor <br>{{ usr }}</a>
+                            <a><i id="i03" class="icon-user"></i>Vendedor <br>{{ venta.vendedor}}</a>
                         </div>
                         <div id="total">
-                            <a><i id="i03" class="icon-banknote"></i>Total<br>124.000 $</a>
+                            <a><i id="i03" class="icon-banknote"></i>Total<br>{{ tot }} $</a>
                         </div>
                     </div>   
                 </div>

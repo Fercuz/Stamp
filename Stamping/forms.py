@@ -9,42 +9,32 @@ class Contacto_Form (forms.Form):
     texto =  forms.CharField(label='',widget=forms.Textarea(attrs={'placeholder': 'Mensaje'}))
 
 class Venta_Form(forms.ModelForm):
- 
+
     def __init__(self, *args, **kwargs):
         super(Venta_Form, self).__init__(*args, **kwargs)
+        # Para cambiar el valor de un campo
+        self.fields['vendedor'].initial = "Administrador"
 
-        self.fields['vendedor'].initial = 'Julio Domingo'
-
-        # Si ademas estamos editando un objeto propiedad
-        if self.instance:
-            # Podemos hacer lo que queramos
-            ven = self.instance.vendedor
-
-
-    def save(self, *args, **kwargs):      
-        # Sobrecargar save devuelve el objeto apunto de ser guardado                   
-        obj_propiedad = super(Venta_Form, self).save(*args, **kwargs)
- 
-        # Podemos hacer lo que queramos antes de guardarlo
-        ven = obj_propiedad.vendedor
-        try:
-            # errror punto de partida
-            obj_propiedad.save()
-        except  AttributeError:
-            return 'Lo sentimos!!..'
-         
-    def clean(self):
-        # Sobrecargar clean devuelve un diccionario con los campos
-        cleaned_data = super(Venta_Form, self).clean()
-        ven = cleaned_data.get("vendedor")
- 
-        # if len(ven) < 3:
-        #     # Podemos lanzar una excepcion que aparecera sobre el campo
-        #     raise forms.ValidationError("Debe tener almenos 3 caracteres")
- 
-        # # Siempre hay que devolver el diccionario
-        return cleaned_data
- 
     class Meta:
-            model = Venta
-            fields = '__all__'
+        model = Venta
+        fields = '__all__'
+
+class Producto_Form(forms.ModelForm):
+
+    class Meta:
+        model = Producto
+        fields = '__all__'
+
+class ProductoInline(object):
+    model = Producto
+    form = Producto_Form
+    form_layout = (
+
+    )
+
+class VentaAdmin(object):
+    form = [Venta_Form,]
+    inlines = [ProductoInline, ]
+    form_layout = (
+
+    )

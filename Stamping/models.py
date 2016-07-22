@@ -51,7 +51,7 @@ class Color(models.Model):
 class Compra(models.Model):
     codigo_compra = models.AutoField(db_column='Codigo_Compra', primary_key=True)  
     comprador = models.CharField(db_column='Comprador', max_length=45)  
-    fecha = models.DateField(db_column='Fecha')  
+    fecha = models.DateField(db_column='Fecha',auto_now_add=True)
 
     def __str__(self):
         return self.codigo_compra
@@ -114,8 +114,8 @@ class Detalleventa(models.Model):
     cantidad = models.DecimalField(db_column='Cantidad', max_digits=10, decimal_places=0) 
     precio = models.FloatField(db_column='Precio', blank=True, null=True) 
 
-    def __str__(self):
-        return self.codigo_detalle_venta
+    #def __str__(self):
+        #return self.codigo_detalle_venta
 
     def __unicode__(self):
         return u'%i' % self.codigo_detalle_venta
@@ -213,7 +213,6 @@ class Producto(models.Model):
         verbose_name = 'Producto'
         verbose_name_plural = 'Productos'
 
-
 @python_2_unicode_compatible
 class Talla(models.Model):
     codigo_talla = models.AutoField(db_column='Codigo_Talla', primary_key=True)  
@@ -232,13 +231,12 @@ class Talla(models.Model):
         verbose_name = 'Talla'
         verbose_name_plural = 'Tallas'
 
-
 @python_2_unicode_compatible
 class Tela(models.Model):
     codigo_tela = models.AutoField(db_column='Codigo_Tela', primary_key=True)  
     nombre = models.CharField(db_column='Nombre', max_length=45)  
     descripcion = models.CharField(db_column='Descripcion', max_length=45, blank=True,
-                                   null=True)  
+                                   null=True)
 
     def __str__(self):
         return self.nombre
@@ -252,7 +250,6 @@ class Tela(models.Model):
         verbose_name = 'Tela'
         verbose_name_plural = 'Telas'
 
-
 @python_2_unicode_compatible
 class Venta(models.Model):
     codigo_venta = models.AutoField(db_column='Codigo_Venta', primary_key=True)
@@ -260,25 +257,14 @@ class Venta(models.Model):
     vendedor = models.CharField(db_column='Vendedor', max_length=45)  
     fecha = models.DateField(db_column='Fecha',auto_now_add=True)
 
-    @property
-    def Venta_Total(self):
-        return self.cantidad*self.precio
-
-    total = property(Venta_Total)
-
-    def __str__(self):
-        return self.codigo_venta
-
     def __unicode__(self):
-        return u'%i' % self.codigo_venta
+        return u'%i' %self.codigo_venta
 
     class Meta:
         managed = False
         db_table = 'venta'
         verbose_name = 'Venta'
         verbose_name_plural = 'Ventas'
-
-
 
 @python_2_unicode_compatible 
 class DjangoMigrations(models.Model):

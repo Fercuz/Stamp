@@ -25,8 +25,8 @@ class DetalleinsumoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 	search_fields = ('codigo_producto','codigo_insumo','descripcion')
 
 class DetalleventaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-	list_display = ('codigo_detalle_venta','codigo_producto','cantidad','precio')
-	search_fields = ('codigo_detalle_venta','codigo_producto','cantidad','precio')
+	list_display = ('codigo_detalle_venta','codigo_venta','codigo_producto','cantidad','precio')
+	search_fields = ('codigo_detalle_venta','codigo_venta','codigo_producto','cantidad','precio')
 
 class EstampadoAdmin(admin.ModelAdmin):
 	list_display = ('codigo_estampado','nombre','imagen','descripcion')
@@ -55,11 +55,9 @@ class OpcionAdmin(admin.TabularInline):
 	extra = 1
 
 class VentaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
-
 	model = Venta
 	form = Venta_Form
 	list_display = ('codigo_venta','codigo_cliente','vendedor','fecha')
-	#readonly_fields = ('vendedor','fecha')
 
 	fielsets = [
 				('Producto',{'fields':['codigo_producto']}),
