@@ -2,7 +2,7 @@ ________________________________________________________________________________
 
 
                                     
-                                                  Stamping 2016
+                                                       Stamping 2016
                                               
                                               
 ___________________________________________________________________________________________
@@ -15,6 +15,10 @@ Duvan Arley Novoa
 
 ____________________________________________________________________________________________
 
-Thanks a lot for fork and contribute to the development.
+
 Muchas gracias por forkear y contribuir al desarrollo de esta aplicacion.
+
+
+Thanks a lot for fork and contribute to the development.
+
 ____________________________________________________________________________________________
