@@ -15,6 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator,EmptyPage,InvalidPage
 from django.forms import inlineformset_factory
 from Stamping.models import *
+from django.db import connection
 
 def index_view(request):
     return render_to_response('index.html', context_instance=RequestContext(request))
@@ -48,33 +49,26 @@ def contacto_view(request):
 
 @staff_member_required
 def factura_view(request,pag):
-    producto = Producto.objects.all()
-    prd = Producto.objects.get(codigo_producto=1)
-    factura_list = Producto.objects.all()
-    ven = Venta.objects.get(codigo_venta=7)
 
-    cliente = Cliente.objects.get(codigo_cliente=1)
-    paginator = Paginator(factura_list,1)
-    total = 2+3000.
-    #np = Venta.objects.get()
+    cliente_lst = Detalleventa.objects.all().filter(codigo_detalle_venta=pag)
+    cursor = connection.cursor()
+    m=cursor.execute('''SELECT dv.Codigo_Detalle_Venta, dv.Codigo_Venta, dv.Codigo_Producto, dv.Cantidad, dv.Precio, v.Codigo_Cliente,  v.Vendedor, v.Fecha FROM `detalleventa` dv INNER JOIN venta v ON v.Codigo_Venta = dv.Codigo_venta where v.Codigo_Venta = 9''')
+
+    pag = Paginator(cliente_lst,1)
 
     try:
         page = int(pag)
     except:
         page = 1
     try:
-        factura = paginator.page(page)
+        factura = pag.page(page)
     except (EmptyPage,InvalidPage):
-        factura = paginator.page(paginator.num_pages)
+        factura = pag.page(pag.num_pages)
 
-    #ctx = {'prod': producto,'fac':factura,'cli':cliente,'usr': usuario}
-    ctx = {'prod': factura,'venta': ven,'tot': total}
-
-    return render_to_response('factura/factura.html',ctx,context_instance=RequestContext(request))
-
+    return render_to_response('factura/factura.html',{'fac': factura,'rs': m},context_instance=RequestContext(request))
 
 def factura_single_view(request, id_fac):
-    factura = Producto.objects.get(codigo_producto=id_fac)
+    factura = Detalleventa.objects.get(codigo_detalle_venta=id_fac)
     return render_to_response('factura/singlefactura.html', {'factura': factura}, context_instance=RequestContext(request))
 
 # Handlers Errors

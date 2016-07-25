@@ -52,43 +52,43 @@
                     <div id="space"> </div>
                     <div id="fac_01">
                         <div id="fecha">
-                            <a><i id="i03" class="icon-calendar2"></i>{{ venta.fecha}}</a>
+                            <a><i id="i03" class="icon-calendar2"></i></a>
                         </div> 
                         <div id="factura">
-                            <a><i id="i03" class="icon-ticket"></i>0X{{ venta.codigo_venta }}FCT</a>
+                            <a><i id="i03" class="icon-ticket"></i>0XFCT</a>
                         </div> 
                     </div>
                     <div id="fac_02">
                         <div id="comprador">
-                            <a><i id="i03" class="icon-user"></i>Comprador <br>{{ cli.nombre }} {{ cli.apellido }}</a>
+                            <a><i id="i03" class="icon-user"></i>Comprador <br> </a>
                         </div>
                         <div id="cedula">
-                            <a>C.C <br>{{ cli.cedula }}</a>
+                            <a>C.C <br></a>
                         </div>
                     </div>
                     <div id="fac_03">
                         <p>{{frm}}</p> 
                         <h1> Productos </h1>
-                            {% if prod %}
+                            {% if fac %}
                                 <table id="tg">
                                     <tr>
                                         <th><i id="i03" class="icon-briefcase"></i><a>Nombre</a></th>
-                                        <th><i id="i03" class="icon-ticket"></i><a>Descripción</a></th>
+                                        <!--th><i id="i03" class="icon-ticket"></i><a>Descripción</a></--th--->
                                         <th><i id="i03" class="icon-notification"></i><a>Cantidad</a></th>
                                         <th><i id="i03" class="icon-banknote"></i><a>Precio</a></th>
                                     </tr>
                                 <tr>
-                                    {% for p in prod %}
-                                        <td><a>{{ p.nombre}}</a></td>
-                                        <td><a>{{ p.descripcion}}</a><br></td>
-                                        <td><a></a></td>
-                                        <td><a>{{ p.precio}}</a></td>
+                                    {% for f in fac %}
+                                        <td><a>{{ f.codigo_producto}}</a></td>
+                                        <td><a>{{ f.cantidad}}</a><br></td>
+                                        <td><a>{{ f.precio}}</a></td>
                                      {% endfor %}
                                 </tr>
                                 </table>
                             {% else %}
                                     <p>No se encontraron facturas. </p>
                             {% endif %}
+                        <hi>{{ c }}</hi>
                     </div>   
                     <div id="fac_04">
                         <div id="vendedor">
