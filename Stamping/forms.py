@@ -19,22 +19,13 @@ class Venta_Form(forms.ModelForm):
         model = Venta
         fields = '__all__'
 
-class Producto_Form(forms.ModelForm):
+class Compra_Form(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Compra_Form, self).__init__(*args, **kwargs)
+        # Para cambiar el valor de un campo
+        self.fields['comprador'].initial = "Administrador"
 
     class Meta:
-        model = Producto
+        model = Compra
         fields = '__all__'
-
-class ProductoInline(object):
-    model = Producto
-    form = Producto_Form
-    form_layout = (
-
-    )
-
-class VentaAdmin(object):
-    form = [Venta_Form,]
-    inlines = [ProductoInline, ]
-    form_layout = (
-
-    )

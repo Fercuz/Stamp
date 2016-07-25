@@ -1,7 +1,7 @@
 from django.contrib import admin
 from Stamping.models import *
 from import_export.admin import ImportExportModelAdmin
-from Stamping.forms import Venta_Form
+from Stamping.forms import Venta_Form, Compra_Form
 
 
 class ClienteAdmin(admin.ModelAdmin):
@@ -11,10 +11,6 @@ class ClienteAdmin(admin.ModelAdmin):
 class ColorAdmin(admin.ModelAdmin):
 	list_display = ('nombre','referencia',)
 	search_fields = ('nombre',)
-
-class CompraAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-	list_display = ('codigo_compra','comprador','fecha')
-	search_fields  = ('codigo_compra','comprador','fecha')
 
 class DetallecompraAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 	list_display = ('codigo_insumo','codigo_compra','cantidad','precio')
@@ -50,9 +46,25 @@ class TallaAdmin(admin.ModelAdmin):
 class TelaAdmin(admin.ModelAdmin):
 	list_display = ('codigo_tela','nombre','descripcion')
 
-class OpcionAdmin(admin.TabularInline):
+class TabDetalleCompraAdmin(admin.TabularInline):
+	model = Detallecompra
+	extra = 1
+
+class TabDetalleVentaAdmin(admin.TabularInline):
 	model = Detalleventa
 	extra = 1
+
+class CompraAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+	model = Compra
+	form = Compra_Form
+	list_display = ('codigo_compra', 'comprador', 'fecha')
+
+	fielsets = [
+		('Insumo', {'fields': ['codigo_insumo']}),
+		(None, {'fields': ['cantidad']}),
+		(None, {'fields': ['precio']}),
+	]
+	inlines = [TabDetalleCompraAdmin]
 
 class VentaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
 	model = Venta
@@ -64,11 +76,12 @@ class VentaAdmin(ImportExportModelAdmin,admin.ModelAdmin):
 				(None,{'fields':['cantidad']}),
 				(None, {'fields': ['precio']}),
 	]
-	inlines = [OpcionAdmin]
+	inlines = [TabDetalleVentaAdmin]
+
 
 admin.site.register(Cliente,ClienteAdmin)
 admin.site.register(Color,ColorAdmin)
-#admin.site.register(Compra,CompraAdmin)
+admin.site.register(Compra,CompraAdmin)
 #admin.site.register(Detallecompra,DetallecompraAdmin)
 #admin.site.register(Detalleinsumo,DetalleinsumoAdmin)
 #admin.site.register(Detalleventa,DetalleventaAdmin)

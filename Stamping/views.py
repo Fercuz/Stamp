@@ -45,7 +45,8 @@ def contacto_view(request):
     ctx = {'form':form, 'email':email,'titulo':titulo, 'texto':texto,'info_send':info_send}
     return render_to_response('contacto.html',ctx, context_instance=RequestContext(request))
 
-#@login_required
+
+@staff_member_required
 def factura_view(request,pag):
     producto = Producto.objects.all()
     prd = Producto.objects.get(codigo_producto=1)

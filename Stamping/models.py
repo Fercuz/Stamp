@@ -53,8 +53,8 @@ class Compra(models.Model):
     comprador = models.CharField(db_column='Comprador', max_length=45)  
     fecha = models.DateField(db_column='Fecha',auto_now_add=True)
 
-    def __str__(self):
-        return self.codigo_compra
+    #def __str__(self):
+        #return self.codigo_compra
 
     def __unicode__(self):
         return u'%i' % self.codigo_compra
@@ -70,12 +70,12 @@ class Compra(models.Model):
 class Detallecompra(models.Model):
     codigo_detalle_compra = models.AutoField(db_column='Codigo_Detalle_Compra',primary_key=True)
     codigo_compra = models.ForeignKey(Compra, models.DO_NOTHING, db_column='Codigo_Compra')  
-    codigo_insumo = models.ForeignKey('Insumo', models.DO_NOTHING, db_column='Codigo_Insumo')  
+    codigo_insumo = models.ForeignKey('Insumo', models.DO_NOTHING, db_column='Codigo_Insumo',verbose_name='Insumo')
     cantidad = models.DecimalField(db_column='Cantidad', max_digits=10, decimal_places=0)  
     precio = models.FloatField(db_column='Precio', blank=True, null=True)  
 
-    def __str__(self):
-        return self.codigo_insumo
+    #def __str__(self):
+        #return self.codigo_insumo
 
     def __unicode__(self):
         return u'%i' % self.codigo_insumo
@@ -94,8 +94,8 @@ class Detalleinsumo(models.Model):
     codigo_insumo = models.ForeignKey('Insumo', models.DO_NOTHING, db_column='Codigo_Insumo')  
     descripcion = models.CharField(db_column='Descripcion', max_length=45, blank=True, null=True)  
 
-    def __str__(self):
-        return self.descripcion
+    #def __str__(self):
+        #return self.descripcion
 
     def __unicode__(self):
         return u'%i' % self.descripcion
@@ -110,7 +110,7 @@ class Detalleinsumo(models.Model):
 class Detalleventa(models.Model):
     codigo_detalle_venta = models.AutoField(db_column='Codigo_Detalle_Venta',primary_key=True)
     codigo_venta = models.ForeignKey('Venta', models.DO_NOTHING, db_column='Codigo_Venta') 
-    codigo_producto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='Codigo_Producto') 
+    codigo_producto = models.ForeignKey('Producto', models.DO_NOTHING, db_column='Codigo_Producto',verbose_name='Producto')
     cantidad = models.DecimalField(db_column='Cantidad', max_digits=10, decimal_places=0) 
     precio = models.FloatField(db_column='Precio', blank=True, null=True) 
 
@@ -170,7 +170,7 @@ class Insumo(models.Model):
     nombre = models.CharField(db_column='Nombre', max_length=45)  
     referencia = models.CharField(db_column='Referencia', max_length=45)  
     tipo = models.CharField(db_column='Tipo', max_length=45)  
-    fecha_compra = models.DateField(db_column='Fecha_Compra')  
+    fecha_compra = models.DateField(db_column='Fecha_Compra',auto_now_add=True)
     fecha_vencimiento = models.DateField(db_column='Fecha_Vencimiento')  
 
     def __str__(self):

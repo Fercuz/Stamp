@@ -96,5 +96,5 @@ STATIC_URL = "/static/"
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'soportestamping@gmail.com'
-EMAIL_HOST_PASSWORD = 'stamping2016'
+EMAIL_HOST_PASSWORD = 'Stamping2016...'
 EMAIL_PORT = 587
