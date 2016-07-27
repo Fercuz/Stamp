@@ -69,7 +69,7 @@
                     <div id="fac_03">
                         <p>{{frm}}</p> 
                         <h1> Productos </h1>
-                            {% if fac %}
+                            {% if dt %}
                                 <table id="tg">
                                     <tr>
                                         <th><i id="i03" class="icon-briefcase"></i><a>Nombre</a></th>
@@ -78,7 +78,7 @@
                                         <th><i id="i03" class="icon-banknote"></i><a>Precio</a></th>
                                     </tr>
                                 <tr>
-                                    {% for f in fac %}
+                                    {% for f in dt %}
                                         <td><a>{{ f.codigo_producto}}</a></td>
                                         <td><a>{{ f.cantidad}}</a><br></td>
                                         <td><a>{{ f.precio}}</a></td>
@@ -88,7 +88,10 @@
                             {% else %}
                                     <p>No se encontraron facturas. </p>
                             {% endif %}
-                        <hi>{{ c }}</hi>
+                            {%  for v in vn  %}
+                                {{  v.cantidad }}
+                            {% endfor %}
+
                     </div>   
                     <div id="fac_04">
                         <div id="vendedor">

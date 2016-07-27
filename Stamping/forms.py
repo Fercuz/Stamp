@@ -12,7 +12,6 @@ class Venta_Form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(Venta_Form, self).__init__(*args, **kwargs)
-        # Para cambiar el valor de un campo
         self.fields['vendedor'].initial = "Administrador"
 
     class Meta:
@@ -23,7 +22,7 @@ class Compra_Form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(Compra_Form, self).__init__(*args, **kwargs)
-        # Para cambiar el valor de un campo
+
         self.fields['comprador'].initial = "Administrador"
 
     class Meta:

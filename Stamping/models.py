@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 @python_2_unicode_compatible
 class Cliente(models.Model):
@@ -126,6 +128,19 @@ class Detalleventa(models.Model):
         unique_together = (('codigo_detalle_venta', 'codigo_venta'),)
         verbose_name = 'Detalle Venta'
         verbose_name_plural = 'Detalle de Ventas'
+
+@receiver(post_save, sender=Detalleventa, dispatch_uid="update_stock_count")
+def update_stock(sender, instance, **kwargs):
+    instance.codigo_producto.stock -= instance.cantidad
+    instance.codigo_producto.save()
+
+'''@receiver(post_save, sender=Detalleventa)
+def act (sender, instance, **kwargs):
+    if instance.codigo_producto.stock == '0' :
+
+    elseif
+
+    endif'''
 
 @python_2_unicode_compatible
 class Estampado(models.Model):

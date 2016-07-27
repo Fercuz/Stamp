@@ -50,9 +50,7 @@ def contacto_view(request):
 @staff_member_required
 def factura_view(request,pag):
 
-    cliente_lst = Detalleventa.objects.all().filter(codigo_detalle_venta=pag)
-    cursor = connection.cursor()
-    m=cursor.execute('''SELECT dv.Codigo_Detalle_Venta, dv.Codigo_Venta, dv.Codigo_Producto, dv.Cantidad, dv.Precio, v.Codigo_Cliente,  v.Vendedor, v.Fecha FROM `detalleventa` dv INNER JOIN venta v ON v.Codigo_Venta = dv.Codigo_venta where v.Codigo_Venta = 9''')
+    cliente_lst = Detalleventa.objects.all().filter(codigo_venta=pag)
 
     pag = Paginator(cliente_lst,1)
 
@@ -61,11 +59,11 @@ def factura_view(request,pag):
     except:
         page = 1
     try:
-        factura = pag.page(page)
+        data = pag.page(page)
     except (EmptyPage,InvalidPage):
-        factura = pag.page(pag.num_pages)
+        data = pag.page(pag.num_pages)
 
-    return render_to_response('factura/factura.html',{'fac': factura,'rs': m},context_instance=RequestContext(request))
+    return render_to_response('factura/factura.html',{'dt': data,'vn': cliente_lst},context_instance=RequestContext(request))
 
 def factura_single_view(request, id_fac):
     factura = Detalleventa.objects.get(codigo_detalle_venta=id_fac)
